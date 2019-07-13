@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id = "@+id/search_patient"
+          android:icon="@drawable/ic_search_white"
+          android:title = "Search Patient"
+          app:showAsAction="always|collapseActionView"
+          app:actionViewClass="androidx.appcompat.widget.SearchView"/>
+
+    <item android:id="@+id/add_patient"
+          android:title="Add Patient"
+          android:icon="@drawable/ic_add_white"
+          app:showAsAction="ifRoom" />
+
+    <group
+            android:checkableBehavior="none" android:id="@+id/group">
+        <item android:id="@+id/sign_out"
+              android:title="Sign Out"
+              app:showAsAction="never"/>
+    </group>
+
+</menu>
