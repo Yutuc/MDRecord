@@ -49,7 +49,7 @@ class EditPatientActivity : AppCompatActivity() {
         weight_unit_of_measurement_radio_group_edit_patient.setOnCheckedChangeListener { _, i ->
             val checkedRadioButton = findViewById<RadioButton>(i).text.toString().trim()
             if(checkedRadioButton == "Kilograms"){
-                weight_input_edit_patient.hint = "Weight(kg)"
+                weight_input_edit_patient.hint = "Weight(Kg)"
             }
             else{
                 weight_input_edit_patient.hint = "Weight(lbs)"
@@ -148,12 +148,12 @@ class EditPatientActivity : AppCompatActivity() {
         val weightString = patientObject.weight.split(Regex("\\s+"))
         if(weightString.contains("Kilograms")){
             kilograms_radio_button_edit_patient.isChecked = true
-            weight_input_edit_patient.hint = "Weight(kg)"
+            weight_input_edit_patient.hint = "Weight(Kg)"
             weight_input_edit_patient.setText(weightString.get(0))
         }
         else{
             pounds_radio_button_edit_patient.isChecked = true
-            weight_input_edit_patient.hint = "Weight(lbs)"
+            weight_input_edit_patient.hint = "Weight(Lbs)"
             weight_input_edit_patient.setText(weightString.get(0))
         }
 

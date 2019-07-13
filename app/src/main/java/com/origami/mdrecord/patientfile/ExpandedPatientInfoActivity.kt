@@ -53,11 +53,12 @@ class ExpandedPatientInfoActivity : AppCompatActivity() {
         blood_type_textview_expanded_patient_info.text = "Blood type: ${patientObject.bloodType}"
 
         val heightString = patientObject.height.split(Regex("\\s+"))
-        val height: String?
+        var height: String?
         var bmiHeight: Float
         if(heightString.size == 1){
             height = "${heightString[0]}"
             bmiHeight = heightString[0].toFloat()
+            height += " m"
         }
         else{
             height = "${heightString[0]}' ${heightString[1]}\""
@@ -65,16 +66,19 @@ class ExpandedPatientInfoActivity : AppCompatActivity() {
         }
 
         val weightString = patientObject.weight.split(Regex("\\s+"))
+        val weight: String?
         val bmiWeight: Float
         if(weightString.contains("Kilograms")){
             bmiWeight = weightString.get(0).toFloat()
+            weight = "${weightString[0]} Kg"
         }
         else{
             bmiWeight = (weightString.get(0).toFloat() / (2.205).toFloat())
+            weight = "${weightString[0]} Lbs"
         }
 
-        height_textview_expanded_patient_info.text = "Height: $height m"
-        weight_textview_expanded_patient_info.text = "Weight: ${patientObject.weight}"
+        height_textview_expanded_patient_info.text = "Height: $height"
+        weight_textview_expanded_patient_info.text = "Weight: ${weight}"
         val formattedBMI = "%.2f".format(getBMI(bmiWeight, bmiHeight))
         bmi_textview_expanded_patient_info.text = "BMI: $formattedBMI"
         nationality_textview_expanded_patient_info.text = "Nationality: ${patientObject.nationality}"
