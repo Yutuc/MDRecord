@@ -56,12 +56,12 @@ class ExpandedPatientInfoActivity : AppCompatActivity() {
         val height: String?
         var bmiHeight: Float
         if(heightString.size == 1){
-            height = "${heightString.get(0)} m"
-            bmiHeight = heightString.get(0).toFloat()
+            height = "${heightString[0]}"
+            bmiHeight = heightString[0].toFloat()
         }
         else{
-            height = "${heightString.get(0)}' ${heightString.get(1)}\""
-            bmiHeight = (heightString.get(0).toFloat()/3.281.toFloat()) + (heightString.get(1).toFloat()/39.37.toFloat())
+            height = "${heightString[0]}' ${heightString[1]}\""
+            bmiHeight = (heightString[0].toFloat()/3.281.toFloat()) + (heightString[1].toFloat()/39.37.toFloat())
         }
 
         val weightString = patientObject.weight.split(Regex("\\s+"))
@@ -73,7 +73,7 @@ class ExpandedPatientInfoActivity : AppCompatActivity() {
             bmiWeight = (weightString.get(0).toFloat() / (2.205).toFloat())
         }
 
-        height_textview_expanded_patient_info.text = "Height: $height"
+        height_textview_expanded_patient_info.text = "Height: $height m"
         weight_textview_expanded_patient_info.text = "Weight: ${patientObject.weight}"
         val formattedBMI = "%.2f".format(getBMI(bmiWeight, bmiHeight))
         bmi_textview_expanded_patient_info.text = "BMI: $formattedBMI"

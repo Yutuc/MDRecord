@@ -133,7 +133,7 @@ class EditPatientActivity : AppCompatActivity() {
             height_inches_input_edit_patient.visibility = View.INVISIBLE
             height_feet_input_edit_patient.setText("")
             height_inches_input_edit_patient.setText("")
-            height_meter_input_edit_patient.setText("${heightString.get(0)} m")
+            height_meter_input_edit_patient.setText("${heightString.get(0)}")
         }
         else{
             feet_and_inches_radio_button_edit_patient.isChecked = true
