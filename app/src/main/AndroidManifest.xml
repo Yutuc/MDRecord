@@ -44,7 +44,8 @@
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value=".patientfile.ViewPatientFileActivity"/>
         </activity>
-        <activity android:name=".patientfile.ViewPatientFileActivity">
+        <activity android:name=".patientfile.ViewPatientFileActivity"
+                  android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value=".ChoosePatientActivity"/>

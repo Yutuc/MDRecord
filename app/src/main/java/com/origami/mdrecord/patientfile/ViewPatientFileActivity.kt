@@ -30,6 +30,7 @@ class ViewPatientFileActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_patient_file)
+        setSupportActionBar(toolbar)
         setTitle("")
 
         val fragmentAdapter = ViewPagerAdapter(supportFragmentManager)
