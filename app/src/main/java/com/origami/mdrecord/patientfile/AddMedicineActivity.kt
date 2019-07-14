@@ -67,7 +67,7 @@ class AddMedicineActivity : AppCompatActivity() {
 
         var medicineArrayList: ArrayList<MedicineObject>? = arrayListOf()
 
-        if(ChoosePatientActivity.patientClicked!!.patientObject.medicineArrayList!! != null) {
+        if(ChoosePatientActivity.patientClicked!!.patientObject.medicineArrayList != null) {
             medicineArrayList = ChoosePatientActivity.patientClicked!!.patientObject.medicineArrayList!!
         }
 

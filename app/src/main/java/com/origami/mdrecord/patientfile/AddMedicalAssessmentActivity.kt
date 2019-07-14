@@ -71,7 +71,7 @@ class AddMedicalAssessmentActivity : AppCompatActivity() {
             medicalHistoryArrayList = ArrayList<AssessmentObject>()
         }
         ChoosePatientActivity.patientClicked!!.patientObject.medicalHistoryArrayList = medicalHistoryArrayList
-        medicalHistoryArrayList!!.add(AssessmentObject(dateAndTime, assessment))
+        medicalHistoryArrayList.add(AssessmentObject(dateAndTime, assessment))
 
         val ref = FirebaseDatabase.getInstance().getReference("/patients/${FirebaseAuth.getInstance().uid}/${ChoosePatientActivity.patientClicked?.patientObject?.uid}").child("medicalHistoryArrayList")
         ref.setValue(medicalHistoryArrayList)

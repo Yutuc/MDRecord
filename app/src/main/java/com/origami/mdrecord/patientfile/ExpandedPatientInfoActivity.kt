@@ -86,10 +86,10 @@ class ExpandedPatientInfoActivity : AppCompatActivity() {
     }//displayPatientInfo function
 
     private fun getAge() : String{
-        val dateOfBirthSplit = patientObject.dateOfBirth?.split("/")
-        val birthYear = dateOfBirthSplit?.get(dateOfBirthSplit.size-1)?.toInt()
+        val dateOfBirthSplit = patientObject.dateOfBirth.split("/")
+        val birthYear = dateOfBirthSplit.get(dateOfBirthSplit.size-1).toInt()
         val currentyear = Calendar.getInstance().get(Calendar.YEAR)
-        return (currentyear-birthYear!!).toString()
+        return (currentyear-birthYear).toString()
     }//getAge function
 
     private fun getGender() : String{

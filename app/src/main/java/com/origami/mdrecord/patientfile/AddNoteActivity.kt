@@ -71,7 +71,7 @@ class AddNoteActivity : AppCompatActivity() {
             notesArrayList = ArrayList<AssessmentObject>()
         }
         ChoosePatientActivity.patientClicked!!.patientObject.notesArrayList = notesArrayList
-        notesArrayList!!.add(AssessmentObject(dateAndTime, assessment))
+        notesArrayList.add(AssessmentObject(dateAndTime, assessment))
 
         val ref = FirebaseDatabase.getInstance().getReference("/patients/${FirebaseAuth.getInstance().uid}/${ChoosePatientActivity.patientClicked?.patientObject?.uid}").child("notesArrayList")
         ref.setValue(notesArrayList)
