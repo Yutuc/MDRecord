@@ -24,8 +24,7 @@
                     android:textSize="18sp"
                     app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="8dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" android:textStyle="bold"
-                    android:textColor="@android:color/black"/>
+                    app:layout_constraintEnd_toEndOf="parent" android:textStyle="bold"/>
             <TextView
                     android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sapien risus, iaculis in varius at, lacinia vitae augue. Aenean diam orci, condimentum quis enim rhoncus, elementum convallis justo. Nulla at lacus facilisis, rutrum mi tincidunt, placerat magna. Vivamus volutpat ac urna at sagittis. Mauris pretium sapien id maximus lacinia. Fusce fermentum tellus sit amet est molestie, sit amet pulvinar velit maximus. Praesent vitae iaculis metus. Praesent non orci enim. Maecenas malesuada eros id nisi malesuada venenatis. Integer quis nisi gravida, tempus massa sit amet, convallis magna. Cras convallis, dui volutpat pulvinar tempor, purus nisl tincidunt magna, nec auctor ex est quis nunc. Etiam dapibus posuere mauris, sit amet commodo quam consequat eget. Vestibulum suscipit, mauris ut gravida facilisis, lorem erat consectetur nisi, a egestas leo urna eu risus. Vestibulum sed neque sit amet tortor egestas auctor in et ligula. Praesent vulputate dui non varius rutrum. Nullam quis cursus augue.  "
                     android:layout_width="0dp"

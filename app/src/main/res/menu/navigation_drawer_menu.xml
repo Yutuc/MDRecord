@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:showIn="navigation_view">
+
+    <item android:title="Medical Forms" >
+
+        <menu>
+            <group android:checkableBehavior="single">
+                <item android:id="@+id/create_medical_certificate"
+                      android:icon="@drawable/ic_notes_white"
+                      android:title="Create Medical Certificate"/>
+
+                <item android:id="@+id/create_medical_abstract_form"
+                      android:icon="@drawable/ic_notes_white"
+                      android:title="Create Medical Abstract Form"/>
+            </group>
+        </menu>
+
+    </item>
+
+    <item android:title="Schedule">
+        <menu>
+            <item android:id="@+id/schedule_appointment"
+                  android:icon="@drawable/ic_calendar_white"
+                  android:title="Schedule Appointment"/>
+        </menu>
+    </item>
+
+</menu>

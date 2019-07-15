@@ -31,6 +31,8 @@ class ViewPatientFileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_patient_file)
         setSupportActionBar(toolbar)
+        supportActionBar!!.setHomeButtonEnabled(true)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         setTitle("")
 
         val fragmentAdapter = ViewPagerAdapter(supportFragmentManager)
