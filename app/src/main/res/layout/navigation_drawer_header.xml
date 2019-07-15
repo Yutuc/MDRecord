@@ -1,39 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <androidx.constraintlayout.widget.ConstraintLayout
+<androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:orientation="vertical"
+        xmlns:tools="http://schemas.android.com/tools" android:orientation="vertical"
         android:layout_width="match_parent"
         android:background="@color/colorAccent"
         android:gravity="bottom"
         android:padding="16dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark"
         android:layout_height="176dp">
-
-    <ImageView
-            android:id="@+id/navigation_drawer_header_imageview"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/ic_launcher_round"/>
-
     <TextView
-            android:id="@+id/navigation_drawer_header_name_textview"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/navigation_drawer_header_imageview"
-            android:layout_width="wrap_content"
+            android:text="Name of Doctor, MD"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:paddingTop="8dp"
-            android:text="Name"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
-
+            android:id="@+id/name_textview_navigation_drawer_header" app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textSize="18sp" android:textAlignment="viewStart" android:textStyle="bold"
+            android:textColor="@android:color/white"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintBottom_toTopOf="@+id/specialty_textview_navigation_drawer_header"/>
     <TextView
-            android:id="@+id/navigation_drawer_header_email_textview"
-            app:layout_constraintTop_toBottomOf="@id/navigation_drawer_header_name_textview"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_width="wrap_content"
+            android:text="Specialty"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:paddingTop="8dp"
-            android:text="Email"/>
-
+            android:id="@+id/specialty_textview_navigation_drawer_header"
+            app:layout_constraintTop_toBottomOf="@+id/name_textview_navigation_drawer_header"
+            app:layout_constraintStart_toStartOf="parent" android:textColor="@android:color/white"
+            android:textAlignment="viewStart" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintBottom_toTopOf="@+id/license_number_textview_navigation_drawer_header"/>
+    <TextView
+            android:text="License Number:"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/license_number_textview_navigation_drawer_header"
+            app:layout_constraintTop_toBottomOf="@+id/specialty_textview_navigation_drawer_header"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" android:textAlignment="viewStart"
+            android:textColor="@android:color/white" app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintBottom_toTopOf="@+id/insurance_number_textview_navigation_drawer_header"/>
+    <TextView
+            android:text="Insurance Number:"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/insurance_number_textview_navigation_drawer_header"
+            app:layout_constraintTop_toBottomOf="@+id/license_number_textview_navigation_drawer_header"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" android:textColor="@android:color/white"
+            android:textAlignment="viewStart" app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintBottom_toTopOf="@+id/s2_number_textview_navigation_drawer_header"/>
+    <TextView
+            android:text="S2 Number:"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/s2_number_textview_navigation_drawer_header"
+            app:layout_constraintTop_toBottomOf="@+id/insurance_number_textview_navigation_drawer_header"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" android:textAlignment="viewStart"
+            android:textColor="@android:color/white" app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

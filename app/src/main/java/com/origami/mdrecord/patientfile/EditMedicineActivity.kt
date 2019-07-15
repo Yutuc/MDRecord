@@ -87,6 +87,7 @@ class EditMedicineActivity : AppCompatActivity() {
                 Toast.makeText(this, "Successfully edited medicine", Toast.LENGTH_SHORT).show()
                 ChoosePatientActivity.patientClicked!!.patientObject.medicineArrayList = medicineArrayList
                 val intent = Intent(this, ViewPatientFileActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK) //clears the stack of activities
                 startActivity(intent)
                 finish()
             }

@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.CalendarContract
 import android.view.MenuItem
-import androidx.fragment.app.FragmentManager
+import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.core.view.GravityCompat
 import androidx.viewpager.widget.ViewPager
 import com.origami.mdrecord.ChoosePatientActivity
 import com.origami.mdrecord.R
@@ -34,6 +36,28 @@ class ViewPatientFileActivity : AppCompatActivity() {
         supportActionBar!!.setHomeButtonEnabled(true)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         setTitle("")
+
+        val toggle = ActionBarDrawerToggle(this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        drawer_layout.addDrawerListener(toggle)
+        toggle.syncState()
+
+        navigation_drawer_view.setNavigationItemSelectedListener {
+            when(it.itemId){
+                R.id.create_medical_certificate ->{
+
+                }
+                R.id.create_medical_abstract_form ->{
+
+                }
+            }
+            drawer_layout.closeDrawer(GravityCompat.START)
+            false //controls whether or not the nav menu item is kept selected on click
+        }
+
+        navigation_drawer_view.getHeaderView(0).setOnClickListener {
+            /*val intent = Intent(this, EditUserActivity::class.java)
+            startActivity(intent)*/
+        }
 
         val fragmentAdapter = ViewPagerAdapter(supportFragmentManager)
 
@@ -126,6 +150,14 @@ class ViewPatientFileActivity : AppCompatActivity() {
     }//getGender function
 
     override fun onBackPressed() {
-
+        if(drawer_layout.isDrawerOpen(GravityCompat.START)){
+            drawer_layout.closeDrawer(GravityCompat.START)
+        }
+        else{
+            val intent = Intent(this, ChoosePatientActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK) //clears the stack of activities
+            startActivity(intent)
+            //NavUtils.navigateUpFromSameTask(this) //makes back pressed go to parent activity
+        }
     }
 }
