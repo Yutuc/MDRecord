@@ -116,7 +116,10 @@ class ChoosePatientActivity : AppCompatActivity() {
             }
 
             override fun onChildChanged(p0: DataSnapshot, p1: String?) {
-
+                val patientObject = p0.getValue(PatientObject::class.java)!!
+                patientsMap[p0.key!!] = patientObject
+                patientsMapCopy[p0.key!!] = patientObject
+                refreshRecyclerView(patientsMap)
             }
 
             override fun onChildAdded(p0: DataSnapshot, p1: String?) {

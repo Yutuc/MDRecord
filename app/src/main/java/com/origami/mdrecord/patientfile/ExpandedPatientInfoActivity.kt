@@ -6,20 +6,28 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.origami.mdrecord.ChoosePatientActivity
 import com.origami.mdrecord.R
+import com.origami.mdrecord.objects.PatientObject
 import kotlinx.android.synthetic.main.activity_expanded_patient_info.*
 import java.util.*
 
 class ExpandedPatientInfoActivity : AppCompatActivity() {
 
-    val patientObject = ChoosePatientActivity.patientClicked!!.patientObject
+    companion object{
+        var patientObject = ChoosePatientActivity.patientClicked!!.patientObject
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_expanded_patient_info)
         setTitle("${patientObject.firstName} ${patientObject.middleName} ${patientObject.lastName}'s Info")
-        displayPatientInfo()
+        pullPatientInfo()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -37,7 +45,24 @@ class ExpandedPatientInfoActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun displayPatientInfo(){
+    private fun pullPatientInfo(){
+        val ref = FirebaseDatabase.getInstance().getReference("/patients/${FirebaseAuth.getInstance().uid}").child("${patientObject.uid}")
+        ref.addValueEventListener(object: ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+
+            }
+
+            override fun onDataChange(p0: DataSnapshot) {
+                val patientObjectPulled = p0.getValue(PatientObject::class.java)
+                patientObject = patientObjectPulled!!
+                setTitle("${patientObjectPulled.firstName} ${patientObjectPulled.middleName} ${patientObjectPulled.lastName}'s Info")
+                displayPatientInfo(patientObjectPulled)
+            }
+
+        })
+    }//pullPatientInfo function
+
+    private fun displayPatientInfo(patientObject: PatientObject){
         name_age_gender_textview_expanded_patient_info.text = "${patientObject.firstName} ${patientObject.middleName} ${patientObject.lastName} ${getAge()}/${getGender()}"
         address_textview_expanded_patient_info.text = "Address: ${ChoosePatientActivity.patientClicked?.patientObject?.address}"
         contact_number_textview_expanded_patient_info.text = "Contact number: ${patientObject.contactNumber}"

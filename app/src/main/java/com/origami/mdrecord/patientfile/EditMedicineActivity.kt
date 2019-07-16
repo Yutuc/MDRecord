@@ -1,6 +1,5 @@
 package com.origami.mdrecord.patientfile
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -12,7 +11,6 @@ import com.origami.mdrecord.ChoosePatientActivity
 import com.origami.mdrecord.R
 import com.origami.mdrecord.objects.MedicineObject
 import kotlinx.android.synthetic.main.activity_edit_medicine.*
-import kotlinx.android.synthetic.main.activity_view_patient_file.*
 
 class EditMedicineActivity : AppCompatActivity() {
 
@@ -85,10 +83,6 @@ class EditMedicineActivity : AppCompatActivity() {
         ref.setValue(medicineArrayList)
             .addOnSuccessListener {
                 Toast.makeText(this, "Successfully edited medicine", Toast.LENGTH_SHORT).show()
-                ChoosePatientActivity.patientClicked!!.patientObject.medicineArrayList = medicineArrayList
-                val intent = Intent(this, ViewPatientFileActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK) //clears the stack of activities
-                startActivity(intent)
                 finish()
             }
             .addOnFailureListener {

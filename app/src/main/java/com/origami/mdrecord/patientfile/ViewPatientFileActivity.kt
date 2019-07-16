@@ -12,6 +12,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.origami.mdrecord.ChoosePatientActivity
 import com.origami.mdrecord.R
+import com.origami.mdrecord.objects.PatientObject
 import com.origami.mdrecord.objects.UserObject
 import kotlinx.android.synthetic.main.activity_view_patient_file.*
 import kotlinx.android.synthetic.main.navigation_drawer_header.view.*
@@ -99,7 +100,7 @@ class ViewPatientFileActivity : AppCompatActivity() {
         }
 
         pullUserInfo()
-        displayPatientInfo()
+        pullPatientInfo()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -139,16 +140,31 @@ class ViewPatientFileActivity : AppCompatActivity() {
         })
     }//pullUserInfo function
 
+    private fun pullPatientInfo(){
+        val ref = FirebaseDatabase.getInstance().getReference("/patients/${FirebaseAuth.getInstance().uid}").child("${patientObject.uid}")
+        ref.addValueEventListener(object: ValueEventListener{
+            override fun onCancelled(p0: DatabaseError) {
+
+            }
+
+            override fun onDataChange(p0: DataSnapshot) {
+                val patientObject = p0.getValue(PatientObject::class.java)
+                displayPatientInfo(patientObject!!)
+            }
+
+        })
+    }//pullPatientInfo function
+
     private fun displayUserInfoInNavigationHeader(currentUser: UserObject){
         val navigationHeader = navigation_drawer_view.getHeaderView(0)
-        navigationHeader.name_textview_navigation_drawer_header.text = "${currentUser?.firstName} ${currentUser?.middleName?.get(0)}. ${currentUser?.lastName}, MD"
-        navigationHeader.specialty_textview_navigation_drawer_header.text = currentUser?.specialty
-        navigationHeader.license_number_textview_navigation_drawer_header.text = "License #: ${currentUser?.licenseNumber}"
-        navigationHeader.insurance_provider_number_textview_navigation_drawer_header.text = "Insurance provider #: ${currentUser?.insuranceProviderNumber}"
-        navigationHeader.s2_number_textview_navigation_drawer_header.text = "S2 #: ${currentUser?.s2Number}"
+        navigationHeader.name_textview_navigation_drawer_header.text = "${currentUser.firstName} ${currentUser.middleName.get(0)}. ${currentUser.lastName}, MD"
+        navigationHeader.specialty_textview_navigation_drawer_header.text = currentUser.specialty
+        navigationHeader.license_number_textview_navigation_drawer_header.text = "License #: ${currentUser.licenseNumber}"
+        navigationHeader.insurance_provider_number_textview_navigation_drawer_header.text = "Insurance provider #: ${currentUser.insuranceProviderNumber}"
+        navigationHeader.s2_number_textview_navigation_drawer_header.text = "S2 #: ${currentUser.s2Number}"
     }//displayUserInfoInNavigationHeader function
 
-    private fun displayPatientInfo(){
+    private fun displayPatientInfo(patientObject: PatientObject){
         name_age_gender_textview_patient_file.text = "${patientObject.firstName} ${patientObject.middleName} ${patientObject.lastName} ${getAge()}/${getGender()}"
         address_textview_patient_file.text = "Address: ${ChoosePatientActivity.patientClicked?.patientObject?.address}"
         contact_number_textview_patient_file.text = "Contact number: ${patientObject.contactNumber}"
@@ -182,9 +198,7 @@ class ViewPatientFileActivity : AppCompatActivity() {
             drawer_layout.closeDrawer(GravityCompat.START)
         }
         else{
-            val intent = Intent(this, ChoosePatientActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK) //clears the stack of activities
-            startActivity(intent)
+            finish()
             //NavUtils.navigateUpFromSameTask(this) //makes back pressed go to parent activity
         }
     }

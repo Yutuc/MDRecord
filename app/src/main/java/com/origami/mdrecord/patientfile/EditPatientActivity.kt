@@ -1,6 +1,5 @@
 package com.origami.mdrecord.patientfile
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -10,15 +9,13 @@ import android.widget.RadioButton
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
-import com.origami.mdrecord.ChoosePatientActivity
 import com.origami.mdrecord.R
-import com.origami.mdrecord.adapters.PatientRow
 import com.origami.mdrecord.objects.PatientObject
 import kotlinx.android.synthetic.main.activity_edit_patient.*
 
 class EditPatientActivity : AppCompatActivity() {
 
-    val patientObject = ChoosePatientActivity.patientClicked!!.patientObject
+    val patientObject = ExpandedPatientInfoActivity.patientObject
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -302,10 +299,7 @@ class EditPatientActivity : AppCompatActivity() {
         ref.setValue(editedPatient)
             .addOnSuccessListener {
                 Toast.makeText(this, "Successfully edited patient", Toast.LENGTH_SHORT).show()
-                ChoosePatientActivity.patientClicked = PatientRow(editedPatient)
-                val intent = Intent(this, ViewPatientFileActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK) //clears the stack of activities
-                startActivity(intent)
+
                 finish()
             }
             .addOnFailureListener {

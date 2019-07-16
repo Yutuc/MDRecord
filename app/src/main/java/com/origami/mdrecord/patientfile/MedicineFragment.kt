@@ -7,15 +7,13 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.ChildEventListener
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 import com.origami.mdrecord.ChoosePatientActivity
 
 import com.origami.mdrecord.R
 import com.origami.mdrecord.adapters.MedicineRow
 import com.origami.mdrecord.objects.MedicineObject
+import com.origami.mdrecord.objects.PatientObject
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.confirm_delete_alert_dialog.view.*
@@ -28,7 +26,9 @@ class MedicineFragment : Fragment() {
         var medicineClicked: MedicineRow? = null
     }
 
-    val medicineArrayList = ArrayList<MedicineObject>()
+    var patientObject = ChoosePatientActivity.patientClicked!!.patientObject
+
+    var medicineArrayList = ArrayList<MedicineObject>()
     val adapter = GroupAdapter<ViewHolder>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -61,7 +61,6 @@ class MedicineFragment : Fragment() {
 
                 dialogView.confirm_delete_button_confirm_delete_alert_dialog.setOnClickListener {
                     medicineArrayList.remove(medicineClicked!!.medicineObject)
-                    ChoosePatientActivity.patientClicked!!.patientObject.medicineArrayList = medicineArrayList
                     val ref = FirebaseDatabase.getInstance().getReference("/patients/${FirebaseAuth.getInstance().uid}/${ChoosePatientActivity.patientClicked?.patientObject?.uid}").child("medicineArrayList")
                     ref.setValue(medicineArrayList)
                     refreshRecyclerView()
@@ -71,7 +70,7 @@ class MedicineFragment : Fragment() {
             true
         }
 
-        pullMedicine()
+        pullPatientInfo()
         return view
     }
 
@@ -85,32 +84,21 @@ class MedicineFragment : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
     }
 
-    private fun pullMedicine(){
-        val ref = FirebaseDatabase.getInstance().getReference("/patients/${FirebaseAuth.getInstance().uid}/${ChoosePatientActivity.patientClicked?.patientObject?.uid}/medicineArrayList")
-        ref.addChildEventListener(object: ChildEventListener {
+    private fun pullPatientInfo(){
+        val ref = FirebaseDatabase.getInstance().getReference("/patients/${FirebaseAuth.getInstance().uid}").child("${patientObject.uid}")
+        ref.addValueEventListener(object: ValueEventListener{
             override fun onCancelled(p0: DatabaseError) {
 
             }
 
-            override fun onChildMoved(p0: DataSnapshot, p1: String?) {
-
-            }
-
-            override fun onChildChanged(p0: DataSnapshot, p1: String?) {
-
-            }
-
-            override fun onChildAdded(p0: DataSnapshot, p1: String?) {
-                val medicineObject = p0.getValue(MedicineObject::class.java)!!
-                medicineArrayList.add(medicineObject)
+            override fun onDataChange(p0: DataSnapshot) {
+                val patientObject = p0.getValue(PatientObject::class.java)
+                medicineArrayList = patientObject!!.medicineArrayList!!
                 refreshRecyclerView()
             }
 
-            override fun onChildRemoved(p0: DataSnapshot) {
-
-            }
         })
-    }//pullMedicine functions
+    }//pullPatientInfo function
 
     private fun refreshRecyclerView(){
         adapter.clear()
