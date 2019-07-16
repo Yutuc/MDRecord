@@ -5,13 +5,16 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.CalendarContract
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.viewpager.widget.ViewPager
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
 import com.origami.mdrecord.ChoosePatientActivity
 import com.origami.mdrecord.R
+import com.origami.mdrecord.objects.UserObject
 import kotlinx.android.synthetic.main.activity_view_patient_file.*
+import kotlinx.android.synthetic.main.navigation_drawer_header.view.*
 import java.util.*
 
 class ViewPatientFileActivity : AppCompatActivity() {
@@ -49,6 +52,10 @@ class ViewPatientFileActivity : AppCompatActivity() {
                 R.id.create_medical_abstract_form ->{
 
                 }
+                R.id.schedule_appointment ->{
+                    val intent = Intent(Intent.ACTION_INSERT, CalendarContract.Events.CONTENT_URI)
+                    startActivity(intent)
+                }
             }
             drawer_layout.closeDrawer(GravityCompat.START)
             false //controls whether or not the nav menu item is kept selected on click
@@ -62,7 +69,7 @@ class ViewPatientFileActivity : AppCompatActivity() {
         val fragmentAdapter = ViewPagerAdapter(supportFragmentManager)
 
         view_pager_patient_file.adapter = fragmentAdapter
-        view_pager_patient_file.offscreenPageLimit = fragmentAdapter!!.count
+        view_pager_patient_file.offscreenPageLimit = fragmentAdapter.count
         tab_layout_patient_file.setupWithViewPager(view_pager_patient_file)
         for (x in 0 until tabIconsArrayList.size){
             tab_layout_patient_file.getTabAt(x)?.setIcon(tabIconsArrayList.get(x))
@@ -91,15 +98,12 @@ class ViewPatientFileActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        pullUserInfo()
         displayPatientInfo()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
-            R.id.open_calendar -> {
-                val intent = Intent(Intent.ACTION_INSERT, CalendarContract.Events.CONTENT_URI)
-                startActivity(intent)
-            }
             R.id.add_medical_assessment -> {
                 val intent = Intent(this, AddMedicalAssessmentActivity::class.java)
                 startActivity(intent)
@@ -120,10 +124,34 @@ class ViewPatientFileActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
+    private fun pullUserInfo(){
+        val ref = FirebaseDatabase.getInstance().getReference("/users").child("${FirebaseAuth.getInstance().uid}")
+        ref.addValueEventListener(object: ValueEventListener{
+            override fun onCancelled(p0: DatabaseError) {
+
+            }
+
+            override fun onDataChange(p0: DataSnapshot) {
+                val currentUser = p0.getValue(UserObject::class.java)
+                displayUserInfoInNavigationHeader(currentUser!!)
+            }
+
+        })
+    }//pullUserInfo function
+
+    private fun displayUserInfoInNavigationHeader(currentUser: UserObject){
+        val navigationHeader = navigation_drawer_view.getHeaderView(0)
+        navigationHeader.name_textview_navigation_drawer_header.text = "${currentUser?.firstName} ${currentUser?.middleName?.get(0)}. ${currentUser?.lastName}, MD"
+        navigationHeader.specialty_textview_navigation_drawer_header.text = currentUser?.specialty
+        navigationHeader.license_number_textview_navigation_drawer_header.text = "License #: ${currentUser?.licenseNumber}"
+        navigationHeader.insurance_provider_number_textview_navigation_drawer_header.text = "Insurance provider #: ${currentUser?.insuranceProviderNumber}"
+        navigationHeader.s2_number_textview_navigation_drawer_header.text = "S2 #: ${currentUser?.s2Number}"
+    }//displayUserInfoInNavigationHeader function
+
     private fun displayPatientInfo(){
         name_age_gender_textview_patient_file.text = "${patientObject.firstName} ${patientObject.middleName} ${patientObject.lastName} ${getAge()}/${getGender()}"
         address_textview_patient_file.text = "Address: ${ChoosePatientActivity.patientClicked?.patientObject?.address}"
-        contact_number_textview_patient_file.text = "Contact number: ${patientObject.phoneNumber}"
+        contact_number_textview_patient_file.text = "Contact number: ${patientObject.contactNumber}"
         email_textview_patient_file.text = "Email: ${patientObject.email}"
         if(ChoosePatientActivity.patientClicked?.patientObject?.diagnoses?.isEmpty()!!){
             diagnoses_textview_patient_file.text = "Diagnoses: N/A"

@@ -40,7 +40,7 @@ class ExpandedPatientInfoActivity : AppCompatActivity() {
     private fun displayPatientInfo(){
         name_age_gender_textview_expanded_patient_info.text = "${patientObject.firstName} ${patientObject.middleName} ${patientObject.lastName} ${getAge()}/${getGender()}"
         address_textview_expanded_patient_info.text = "Address: ${ChoosePatientActivity.patientClicked?.patientObject?.address}"
-        contact_number_textview_expanded_patient_info.text = "Contact number: ${patientObject.phoneNumber}"
+        contact_number_textview_expanded_patient_info.text = "Contact number: ${patientObject.contactNumber}"
         email_textview_expanded_patient_info.text = "Email: ${patientObject.email}"
         if(ChoosePatientActivity.patientClicked?.patientObject?.diagnoses?.isEmpty()!!){
             diagnoses_textview_expanded_patient_info.text = "N/A"

@@ -83,7 +83,7 @@ class CreatePatientActivity : AppCompatActivity() {
         val religion = religion_input_create_patient.text.toString().trim()
         val address = address_input_create_patient.text.toString().trim()
         val email = email_input_create_patient.text.toString().trim()
-        val phoneNumber = phone_number_input_create_patient.text.toString().trim()
+        val contactNumber = contact_number_input_create_patient.text.toString().trim()
         var diagnoses = diagnoses_input_create_patient.text.toString().trim()
 
         if(firstName.isEmpty()){
@@ -148,8 +148,8 @@ class CreatePatientActivity : AppCompatActivity() {
             Toast.makeText(this, "Please enter the patient's email", Toast.LENGTH_SHORT).show()
             return
         }
-        else if(phoneNumber.isEmpty()){
-            Toast.makeText(this, "Please enter the patient's phone number", Toast.LENGTH_SHORT).show()
+        else if(contactNumber.isEmpty()){
+            Toast.makeText(this, "Please enter the patient's contact number", Toast.LENGTH_SHORT).show()
             return
         }
         else if(diagnoses.isEmpty()){
@@ -193,7 +193,7 @@ class CreatePatientActivity : AppCompatActivity() {
                 religion,
                 address,
                 email,
-                phoneNumber,
+                contactNumber,
                 diagnoses,
                 null,
                 null,

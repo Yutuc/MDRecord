@@ -6,9 +6,4 @@
           android:icon="@drawable/ic_add_white"
           app:showAsAction="ifRoom" />
 
-    <item android:id="@+id/open_calendar"
-          android:title="Open Calendar"
-          android:icon="@drawable/ic_calendar_white"
-          app:showAsAction="ifRoom" />
-
 </menu>

@@ -15,7 +15,6 @@ import com.origami.mdrecord.R
 import com.origami.mdrecord.adapters.PatientRow
 import com.origami.mdrecord.objects.PatientObject
 import kotlinx.android.synthetic.main.activity_edit_patient.*
-import kotlinx.android.synthetic.main.activity_view_patient_file.*
 
 class EditPatientActivity : AppCompatActivity() {
 
@@ -161,7 +160,7 @@ class EditPatientActivity : AppCompatActivity() {
         religion_input_edit_patient.setText(patientObject.religion)
         address_input_edit_patient.setText(patientObject.address)
         email_input_edit_patient.setText(patientObject.email)
-        phone_number_input_edit_patient.setText(patientObject.phoneNumber)
+        contact_number_input_edit_patient.setText(patientObject.contactNumber)
         diagnoses_input_edit_patient.setText(patientObject.diagnoses)
     }//displayInfo function
 
@@ -183,7 +182,7 @@ class EditPatientActivity : AppCompatActivity() {
         val religion = religion_input_edit_patient.text.toString().trim()
         val address = address_input_edit_patient.text.toString().trim()
         val email = email_input_edit_patient.text.toString().trim()
-        val phoneNumber = phone_number_input_edit_patient.text.toString().trim()
+        val contactNumber = contact_number_input_edit_patient.text.toString().trim()
         var diagnoses = diagnoses_input_edit_patient.text.toString().trim()
 
         if(firstName.isEmpty()){
@@ -248,8 +247,8 @@ class EditPatientActivity : AppCompatActivity() {
             Toast.makeText(this, "Please enter the patient's email", Toast.LENGTH_SHORT).show()
             return
         }
-        else if(phoneNumber.isEmpty()){
-            Toast.makeText(this, "Please enter the patient's phone number", Toast.LENGTH_SHORT).show()
+        else if(contactNumber.isEmpty()){
+            Toast.makeText(this, "Please enter the patient's contact number", Toast.LENGTH_SHORT).show()
             return
         }
         else if(diagnoses.isEmpty()){
@@ -292,7 +291,7 @@ class EditPatientActivity : AppCompatActivity() {
             religion,
             address,
             email,
-            phoneNumber,
+            contactNumber,
             diagnoses,
             patientObject.medicalHistoryArrayList,
             patientObject.medicineArrayList,

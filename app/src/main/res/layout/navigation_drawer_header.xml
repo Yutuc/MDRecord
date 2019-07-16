@@ -29,7 +29,7 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintBottom_toTopOf="@+id/license_number_textview_navigation_drawer_header"/>
     <TextView
-            android:text="License Number:"
+            android:text="License #:"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/license_number_textview_navigation_drawer_header"
@@ -37,23 +37,23 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" android:textAlignment="viewStart"
             android:textColor="@android:color/white" app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintBottom_toTopOf="@+id/insurance_number_textview_navigation_drawer_header"/>
+            app:layout_constraintBottom_toTopOf="@+id/insurance_provider_number_textview_navigation_drawer_header"/>
     <TextView
-            android:text="Insurance Number:"
+            android:text="Insurance #:"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/insurance_number_textview_navigation_drawer_header"
+            android:id="@+id/insurance_provider_number_textview_navigation_drawer_header"
             app:layout_constraintTop_toBottomOf="@+id/license_number_textview_navigation_drawer_header"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" android:textColor="@android:color/white"
             android:textAlignment="viewStart" app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintBottom_toTopOf="@+id/s2_number_textview_navigation_drawer_header"/>
     <TextView
-            android:text="S2 Number:"
+            android:text="S2 #:"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/s2_number_textview_navigation_drawer_header"
-            app:layout_constraintTop_toBottomOf="@+id/insurance_number_textview_navigation_drawer_header"
+            app:layout_constraintTop_toBottomOf="@+id/insurance_provider_number_textview_navigation_drawer_header"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" android:textAlignment="viewStart"
             android:textColor="@android:color/white" app:layout_constraintBottom_toBottomOf="parent"

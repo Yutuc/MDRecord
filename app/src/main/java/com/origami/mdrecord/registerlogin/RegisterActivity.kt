@@ -31,7 +31,14 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun registerUser(){
         val firstName = first_name_input_register.text.toString().trim()
+        val middleName = middle_name_input_register.text.toString().trim()
         val lastName = last_name_input_register.text.toString().trim()
+        val specialty = specialty_input_register.text.toString().trim()
+        val licenseNumber = license_number_input_register.text.toString().trim()
+        val insuranceProviderNumber = insurance_provider_number_register.text.toString().trim()
+        val s2Number = s2_number_input_register.text.toString().trim()
+        val clinicAddress = clinic_address_input_register.text.toString().trim()
+        val contactNumber = contact_number_input_register.text.toString().trim()
         val email = email_input_register.text.toString().trim()
         val password = password_input_register.text.toString().trim()
         val confirmPassword = confirm_password_input_register.text.toString().trim()
@@ -40,8 +47,36 @@ class RegisterActivity : AppCompatActivity() {
             Toast.makeText(this, "Please enter your first name", Toast.LENGTH_SHORT).show()
             return
         }
+        else if(middleName.isEmpty()){
+            Toast.makeText(this, "Please enter your middle name", Toast.LENGTH_SHORT).show()
+            return
+        }
         else if(lastName.isEmpty()){
             Toast.makeText(this, "Please enter your last name", Toast.LENGTH_SHORT).show()
+            return
+        }
+        else if(specialty.isEmpty()){
+            Toast.makeText(this, "Please enter your specialty", Toast.LENGTH_SHORT).show()
+            return
+        }
+        else if(licenseNumber.isEmpty()){
+            Toast.makeText(this, "Please enter your license number", Toast.LENGTH_SHORT).show()
+            return
+        }
+        else if(insuranceProviderNumber.isEmpty()){
+            Toast.makeText(this, "Please enter your insurance provider number", Toast.LENGTH_SHORT).show()
+            return
+        }
+        else if(s2Number.isEmpty()){
+            Toast.makeText(this, "Please enter your S2 number", Toast.LENGTH_SHORT).show()
+            return
+        }
+        else if(clinicAddress.isEmpty()){
+            Toast.makeText(this, "Please enter your clinic address", Toast.LENGTH_SHORT).show()
+            return
+        }
+        else if(contactNumber.isEmpty()){
+            Toast.makeText(this, "Please enter your contact number", Toast.LENGTH_SHORT).show()
             return
         }
         else if(email.isEmpty()){
@@ -63,7 +98,7 @@ class RegisterActivity : AppCompatActivity() {
         else{
             FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
                 .addOnSuccessListener {
-                    saveUserToFirebase(firstName, lastName, email, password)
+                    saveUserToFirebase(firstName, middleName, lastName, specialty, licenseNumber, insuranceProviderNumber, s2Number, clinicAddress, contactNumber, email, password)
                 }
                 .addOnFailureListener {
                     Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
@@ -71,9 +106,9 @@ class RegisterActivity : AppCompatActivity() {
         }
     }//registerUser function
 
-    private fun saveUserToFirebase(firstName: String, lastName: String, email: String, password: String){
+    private fun saveUserToFirebase(firstName: String, middleName: String, lastName: String, specialty:String, licenseNumber: String, insuranceProviderNumber: String, s2Number: String, clinicAddress: String, contactNumber: String, email: String, password: String){
         val uid = FirebaseAuth.getInstance().uid
-        val user = UserObject(uid!!, firstName, lastName, email, password)
+        val user = UserObject(uid!!, firstName, middleName, lastName, specialty, licenseNumber, insuranceProviderNumber, s2Number, clinicAddress, contactNumber, email, password)
         val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
 
         ref.setValue(user)
