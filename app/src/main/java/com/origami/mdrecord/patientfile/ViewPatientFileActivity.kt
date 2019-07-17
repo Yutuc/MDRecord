@@ -22,6 +22,7 @@ class ViewPatientFileActivity : AppCompatActivity() {
 
     companion object{
         var currentTab = 0
+        var currentUser: UserObject? = null
     }
 
     var patientObject = ChoosePatientActivity.patientClicked!!.patientObject
@@ -60,11 +61,6 @@ class ViewPatientFileActivity : AppCompatActivity() {
             }
             drawer_layout.closeDrawer(GravityCompat.START)
             false //controls whether or not the nav menu item is kept selected on click
-        }
-
-        navigation_drawer_view.getHeaderView(0).setOnClickListener {
-            /*val intent = Intent(this, EditUserActivity::class.java)
-            startActivity(intent)*/
         }
 
         val fragmentAdapter = ViewPagerAdapter(supportFragmentManager)
@@ -133,10 +129,10 @@ class ViewPatientFileActivity : AppCompatActivity() {
             }
 
             override fun onDataChange(p0: DataSnapshot) {
-                val currentUser = p0.getValue(UserObject::class.java)
-                displayUserInfoInNavigationHeader(currentUser!!)
+                val currentUserPulled = p0.getValue(UserObject::class.java)
+                currentUser = currentUserPulled
+                displayUserInfoInNavigationHeader(currentUserPulled!!)
             }
-
         })
     }//pullUserInfo function
 
@@ -151,7 +147,6 @@ class ViewPatientFileActivity : AppCompatActivity() {
                 val patientObject = p0.getValue(PatientObject::class.java)
                 displayPatientInfo(patientObject!!)
             }
-
         })
     }//pullPatientInfo function
 

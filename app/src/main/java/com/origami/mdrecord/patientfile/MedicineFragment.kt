@@ -61,6 +61,7 @@ class MedicineFragment : Fragment() {
 
                 dialogView.confirm_delete_button_confirm_delete_alert_dialog.setOnClickListener {
                     medicineArrayList.remove(medicineClicked!!.medicineObject)
+                    ChoosePatientActivity.patientClicked!!.patientObject.medicineArrayList = medicineArrayList
                     val ref = FirebaseDatabase.getInstance().getReference("/patients/${FirebaseAuth.getInstance().uid}/${ChoosePatientActivity.patientClicked?.patientObject?.uid}").child("medicineArrayList")
                     ref.setValue(medicineArrayList)
                     refreshRecyclerView()

@@ -9,6 +9,16 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity android:name=".ViewUserProfileActivity">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".ChoosePatientActivity"/>
+        </activity>
+        <activity android:name=".patientfile.EditUserActivity">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".ViewUserProfileActivity"/>
+        </activity>
         <activity android:name=".patientfile.EditMedicineActivity">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
@@ -44,8 +54,9 @@
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value=".patientfile.ViewPatientFileActivity"/>
         </activity>
-        <activity android:name=".patientfile.ViewPatientFileActivity"
-                  android:theme="@style/AppTheme.NoActionBar">
+        <activity
+                android:name=".patientfile.ViewPatientFileActivity"
+                android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value=".ChoosePatientActivity"/>

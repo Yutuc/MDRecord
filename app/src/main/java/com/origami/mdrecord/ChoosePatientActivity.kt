@@ -85,12 +85,14 @@ class ChoosePatientActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
-            R.id.search_patient-> {
-
-            }
-
             R.id.add_patient -> {
                 val intent = Intent(this, CreatePatientActivity::class.java)
+                startActivity(intent)
+            }
+
+
+            R.id.view_user_profile -> {
+                val intent = Intent(this, ViewUserProfileActivity::class.java)
                 startActivity(intent)
             }
 
@@ -130,7 +132,9 @@ class ChoosePatientActivity : AppCompatActivity() {
             }
 
             override fun onChildRemoved(p0: DataSnapshot) {
-
+                patientsMap.remove(p0.key)
+                patientsMapCopy.remove((p0.key))
+                refreshRecyclerView(patientsMap)
             }
 
         })

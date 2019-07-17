@@ -1,6 +1,5 @@
 package com.origami.mdrecord.patientfile
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -76,7 +75,6 @@ class AddMedicineActivity : AppCompatActivity() {
         ref.setValue(medicineArrayList)
             .addOnSuccessListener {
                 Toast.makeText(this, "Successfully added medicine", Toast.LENGTH_SHORT).show()
-                ChoosePatientActivity.patientClicked!!.patientObject.medicineArrayList = medicineArrayList
                 finish()
             }
             .addOnFailureListener {

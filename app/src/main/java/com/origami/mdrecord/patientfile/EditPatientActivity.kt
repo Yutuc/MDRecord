@@ -299,7 +299,6 @@ class EditPatientActivity : AppCompatActivity() {
         ref.setValue(editedPatient)
             .addOnSuccessListener {
                 Toast.makeText(this, "Successfully edited patient", Toast.LENGTH_SHORT).show()
-
                 finish()
             }
             .addOnFailureListener {

@@ -159,7 +159,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/clinic_address_input_register"
                         app:layout_constraintStart_toStartOf="@+id/clinic_address_input_register"
                         app:layout_constraintEnd_toEndOf="@+id/clinic_address_input_register"
-                        android:hint="Phone number"/>
+                        android:hint="Contact number"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
