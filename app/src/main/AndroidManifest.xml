@@ -9,22 +9,30 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity android:name=".SplashScreenActivity"
+                  android:theme="@style/SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
         <activity android:name=".ViewUserProfileActivity">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value=".ChoosePatientActivity"/>
         </activity>
-        <activity android:name=".patientfile.EditUserActivity">
+        <activity android:name=".EditUserActivity">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value=".ViewUserProfileActivity"/>
         </activity>
-        <activity android:name=".patientfile.EditMedicineActivity">
+        <activity android:name=".patientfile.EditMedicationActivity">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value=".patientfile.ViewPatientFileActivity"/>
         </activity>
-        <activity android:name=".patientfile.AddMedicineActivity">
+        <activity android:name=".patientfile.AddMedicationActivity">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value=".patientfile.ViewPatientFileActivity"/>
@@ -44,7 +52,7 @@
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value=".patientfile.ViewPatientFileActivity"/>
         </activity>
-        <activity android:name=".patientfile.AddLabAssessmentActivity">
+        <activity android:name=".patientfile.AddLabResultActivity">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value=".patientfile.ViewPatientFileActivity"/>
@@ -69,11 +77,6 @@
                     android:value=".ChoosePatientActivity"/>
         </activity>
         <activity android:name=".ChoosePatientActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity>
         <activity
                 android:name=".registerlogin.RegisterActivity"

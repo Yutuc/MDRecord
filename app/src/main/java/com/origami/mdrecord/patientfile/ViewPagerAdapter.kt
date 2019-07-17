@@ -12,13 +12,13 @@ class ViewPagerAdapter (fm: FragmentManager?) : FragmentPagerAdapter(fm) {
                 MedicalHistoryFragment()
             }
             1 -> {
-                MedicineFragment()
+                MedicationFragment()
             }
             2 -> {
-                NotesFragment()
+                LabHistoryFragment()
             }
             else -> {
-                LabHistoryFragment()
+                NotesFragment()
             }
         }
     }
@@ -36,10 +36,10 @@ class ViewPagerAdapter (fm: FragmentManager?) : FragmentPagerAdapter(fm) {
                 "Medicine"
             }
             2 -> {
-                "Notes"
+               "Lab History"
             }
             else -> {
-                "Lab History"
+                "Notes"
             }
         }
     }*/

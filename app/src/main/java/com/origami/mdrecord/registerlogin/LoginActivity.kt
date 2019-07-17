@@ -42,10 +42,16 @@ class LoginActivity : AppCompatActivity() {
         else{
             FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
                 .addOnSuccessListener {
-                    Toast.makeText(this, "Successfully logged in", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this, ChoosePatientActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK) //clears the stack of activities
-                    startActivity(intent)
+                    if(FirebaseAuth.getInstance().currentUser!!.isEmailVerified){
+                        Toast.makeText(this, "Successfully logged in", Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this, ChoosePatientActivity::class.java)
+                        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK) //clears the stack of activities
+                        startActivity(intent)
+                    }
+                    else{
+                        Toast.makeText(this, "Please verify email before logging in", Toast.LENGTH_SHORT).show()
+                        FirebaseAuth.getInstance().signOut()
+                    }
                 }
                 .addOnFailureListener {
                     Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()

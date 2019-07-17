@@ -3,6 +3,7 @@ package com.origami.mdrecord.registerlogin
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Patterns
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
@@ -39,7 +40,9 @@ class RegisterActivity : AppCompatActivity() {
         val s2Number = s2_number_input_register.text.toString().trim()
         val clinicAddress = clinic_address_input_register.text.toString().trim()
         val contactNumber = contact_number_input_register.text.toString().trim()
+
         val email = email_input_register.text.toString().trim()
+        val isEmailValid = Patterns.EMAIL_ADDRESS.matcher(email).matches()
         val password = password_input_register.text.toString().trim()
         val confirmPassword = confirm_password_input_register.text.toString().trim()
 
@@ -83,6 +86,10 @@ class RegisterActivity : AppCompatActivity() {
             Toast.makeText(this, "Please enter your email", Toast.LENGTH_SHORT).show()
             return
         }
+        else if(!isEmailValid){
+            Toast.makeText(this, "Please enter a valid email address", Toast.LENGTH_SHORT).show()
+            return
+        }
         else if(password.isEmpty()){
             Toast.makeText(this, "Please enter your password", Toast.LENGTH_SHORT).show()
             return
@@ -98,7 +105,9 @@ class RegisterActivity : AppCompatActivity() {
         else{
             FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
                 .addOnSuccessListener {
+                    FirebaseAuth.getInstance().currentUser!!.sendEmailVerification()
                     saveUserToFirebase(firstName, middleName, lastName, specialty, licenseNumber, insuranceProviderNumber, s2Number, clinicAddress, contactNumber, email, password)
+                    FirebaseAuth.getInstance().signOut()
                 }
                 .addOnFailureListener {
                     Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
@@ -113,9 +122,8 @@ class RegisterActivity : AppCompatActivity() {
 
         ref.setValue(user)
             .addOnSuccessListener {
-                Toast.makeText(this, "Successful registration", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, ChoosePatientActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK) //clears the stack of activities
+                Toast.makeText(this, "Successful registration\nPlease verify your email address before logging in", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, LoginActivity::class.java)
                 startActivity(intent)
                 finish()
             }

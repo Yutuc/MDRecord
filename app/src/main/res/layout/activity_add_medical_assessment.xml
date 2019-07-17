@@ -16,5 +16,5 @@
             android:id="@+id/assessment_input_medical_history" app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent"
-            android:hint="Assessment"/>
+            android:hint="Assessment(s)"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

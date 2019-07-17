@@ -105,12 +105,12 @@ class ViewPatientFileActivity : AppCompatActivity() {
                 val intent = Intent(this, AddMedicalAssessmentActivity::class.java)
                 startActivity(intent)
             }
-            R.id.add_medicine -> {
-                val intent = Intent(this, AddMedicineActivity::class.java)
+            R.id.add_medication -> {
+                val intent = Intent(this, AddMedicationActivity::class.java)
                 startActivity(intent)
             }
-            R.id.add_lab -> {
-                val intent = Intent(this, AddLabAssessmentActivity::class.java)
+            R.id.add_lab_result -> {
+                val intent = Intent(this, AddLabResultActivity::class.java)
                 startActivity(intent)
             }
             R.id.add_note -> {

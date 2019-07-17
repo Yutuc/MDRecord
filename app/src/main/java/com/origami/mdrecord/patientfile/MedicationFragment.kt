@@ -11,41 +11,41 @@ import com.google.firebase.database.*
 import com.origami.mdrecord.ChoosePatientActivity
 
 import com.origami.mdrecord.R
-import com.origami.mdrecord.adapters.MedicineRow
-import com.origami.mdrecord.objects.MedicineObject
+import com.origami.mdrecord.adapters.MedicationRow
+import com.origami.mdrecord.objects.MedicationObject
 import com.origami.mdrecord.objects.PatientObject
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
-import kotlinx.android.synthetic.main.confirm_delete_alert_dialog.view.*
-import kotlinx.android.synthetic.main.edit_or_delete_alert_dialog.view.*
-import kotlinx.android.synthetic.main.fragment_medicine.view.*
+import kotlinx.android.synthetic.main.confirm_medication_delete_alert_dialog.view.*
+import kotlinx.android.synthetic.main.edit_or_delete_medication_alert_dialog.view.*
+import kotlinx.android.synthetic.main.fragment_medication.view.*
 
-class MedicineFragment : Fragment() {
+class MedicationFragment : Fragment() {
 
     companion object{
-        var medicineClicked: MedicineRow? = null
+        var medicationClicked: MedicationRow? = null
     }
 
     var patientObject = ChoosePatientActivity.patientClicked!!.patientObject
 
-    var medicineArrayList = ArrayList<MedicineObject>()
+    var medicationArrayList = ArrayList<MedicationObject>()
     val adapter = GroupAdapter<ViewHolder>()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view: View = inflater.inflate(R.layout.fragment_medicine, container, false)
+        val view: View = inflater.inflate(R.layout.fragment_medication, container, false)
         view.recyclerview_medicine.adapter = adapter
 
         adapter.setOnItemLongClickListener { item, _ ->
-            medicineClicked = item as MedicineRow
+            medicationClicked = item as MedicationRow
             val dialogBuilder = AlertDialog.Builder(context)
-            var dialogView = layoutInflater.inflate(R.layout.edit_or_delete_alert_dialog, null)
+            var dialogView = layoutInflater.inflate(R.layout.edit_or_delete_medication_alert_dialog, null)
             dialogBuilder.setView(dialogView)
 
             val alertDialog = dialogBuilder.create()!!
             alertDialog.show()
 
             dialogView.edit_button_edit_or_delete_alert_dialog.setOnClickListener {
-                val intent = Intent(context, EditMedicineActivity::class.java)
+                val intent = Intent(context, EditMedicationActivity::class.java)
                 startActivity(intent)
                 alertDialog.dismiss()
             }
@@ -53,17 +53,17 @@ class MedicineFragment : Fragment() {
             dialogView.delete_button_edit_or_delete_alert_dialog.setOnClickListener {
                 alertDialog.dismiss()
 
-                dialogView = layoutInflater.inflate(R.layout.confirm_delete_alert_dialog, null)
+                dialogView = layoutInflater.inflate(R.layout.confirm_medication_delete_alert_dialog, null)
                 dialogBuilder.setView(dialogView)
 
                 val alertDialog = dialogBuilder.create()!!
                 alertDialog.show()
 
-                dialogView.confirm_delete_button_confirm_delete_alert_dialog.setOnClickListener {
-                    medicineArrayList.remove(medicineClicked!!.medicineObject)
-                    ChoosePatientActivity.patientClicked!!.patientObject.medicineArrayList = medicineArrayList
-                    val ref = FirebaseDatabase.getInstance().getReference("/patients/${FirebaseAuth.getInstance().uid}/${ChoosePatientActivity.patientClicked?.patientObject?.uid}").child("medicineArrayList")
-                    ref.setValue(medicineArrayList)
+                dialogView.confirm_delete_button_confirm_medicine_delete_alert_dialog.setOnClickListener {
+                    medicationArrayList.remove(medicationClicked!!.medicationObject)
+                    ChoosePatientActivity.patientClicked!!.patientObject.medicationArrayList = medicationArrayList
+                    val ref = FirebaseDatabase.getInstance().getReference("/patients/${FirebaseAuth.getInstance().uid}/${ChoosePatientActivity.patientClicked?.patientObject?.uid}").child("medicationArrayList")
+                    ref.setValue(medicationArrayList)
                     refreshRecyclerView()
                     alertDialog.dismiss()
                 }
@@ -81,7 +81,7 @@ class MedicineFragment : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        inflater?.inflate(R.menu.medicine_menu, menu)
+        inflater?.inflate(R.menu.medication_menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
 
@@ -94,7 +94,7 @@ class MedicineFragment : Fragment() {
 
             override fun onDataChange(p0: DataSnapshot) {
                 val patientObject = p0.getValue(PatientObject::class.java)
-                medicineArrayList = patientObject!!.medicineArrayList!!
+                medicationArrayList = patientObject!!.medicationArrayList!!
                 refreshRecyclerView()
             }
 
@@ -103,8 +103,8 @@ class MedicineFragment : Fragment() {
 
     private fun refreshRecyclerView(){
         adapter.clear()
-        medicineArrayList.forEach {
-            adapter.add(MedicineRow(it))
+        medicationArrayList.forEach {
+            adapter.add(MedicationRow(it))
         }
     }//refreshRecyclerView function
 }

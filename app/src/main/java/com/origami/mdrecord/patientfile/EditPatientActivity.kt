@@ -291,7 +291,7 @@ class EditPatientActivity : AppCompatActivity() {
             contactNumber,
             diagnoses,
             patientObject.medicalHistoryArrayList,
-            patientObject.medicineArrayList,
+            patientObject.medicationArrayList,
             patientObject.labHistoryArrayList,
             patientObject.notesArrayList
         )

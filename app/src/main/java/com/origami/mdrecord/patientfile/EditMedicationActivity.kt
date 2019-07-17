@@ -9,29 +9,29 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.origami.mdrecord.ChoosePatientActivity
 import com.origami.mdrecord.R
-import com.origami.mdrecord.objects.MedicineObject
-import kotlinx.android.synthetic.main.activity_edit_medicine.*
+import com.origami.mdrecord.objects.MedicationObject
+import kotlinx.android.synthetic.main.activity_edit_medication.*
 
-class EditMedicineActivity : AppCompatActivity() {
+class EditMedicationActivity : AppCompatActivity() {
 
-    val medicineObject = MedicineFragment.medicineClicked!!.medicineObject
+    val medicineObject = MedicationFragment.medicationClicked!!.medicationObject
     val patientObject = ChoosePatientActivity.patientClicked!!.patientObject
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_edit_medicine)
-        setTitle("Edit ${MedicineFragment.medicineClicked!!.medicineObject.drugName}")
+        setContentView(R.layout.activity_edit_medication)
+        setTitle("Edit ${MedicationFragment.medicationClicked!!.medicationObject.drugName}")
         displayInfo()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.edit_medicine_menu, menu)
+        menuInflater.inflate(R.menu.edit_medication_menu, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
-            R.id.save_edit_medicine -> {
+            R.id.save_edit_medication -> {
                 val drugName = drug_name_input_edit_medicine.text.toString().trim()
                 val dose = dose_input_edit_medicine.text.toString().trim()
                 val frequency = frequency_input_edit_medicine.text.toString().trim()
@@ -54,7 +54,7 @@ class EditMedicineActivity : AppCompatActivity() {
                     return true
                 }
                 else{
-                    saveMedicine()
+                    saveMedication()
                 }
             }
         }
@@ -68,18 +68,18 @@ class EditMedicineActivity : AppCompatActivity() {
         instructions_input_edit_medicine.setText(medicineObject.instructions)
     }//displayInfo function
 
-    private fun saveMedicine(){
+    private fun saveMedication(){
         val drugName = drug_name_input_edit_medicine.text.toString().trim()
         val dose = dose_input_edit_medicine.text.toString().trim()
         val frequency = frequency_input_edit_medicine.text.toString().trim()
         val instructions = instructions_input_edit_medicine.text.toString().trim()
 
-        var medicineArrayList = patientObject.medicineArrayList!!
+        var medicineArrayList = patientObject.medicationArrayList!!
 
-        medicineArrayList.set(find(), MedicineObject(medicineObject.uid, drugName, dose, frequency, instructions))
-        patientObject.medicineArrayList = medicineArrayList
+        medicineArrayList.set(find(), MedicationObject(medicineObject.uid, drugName, dose, frequency, instructions))
+        patientObject.medicationArrayList = medicineArrayList
 
-        val ref = FirebaseDatabase.getInstance().getReference("/patients/${FirebaseAuth.getInstance().uid}/${ChoosePatientActivity.patientClicked?.patientObject?.uid}").child("medicineArrayList")
+        val ref = FirebaseDatabase.getInstance().getReference("/patients/${FirebaseAuth.getInstance().uid}/${ChoosePatientActivity.patientClicked?.patientObject?.uid}").child("medicationArrayList")
         ref.setValue(medicineArrayList)
             .addOnSuccessListener {
                 Toast.makeText(this, "Successfully edited medicine", Toast.LENGTH_SHORT).show()
@@ -91,7 +91,7 @@ class EditMedicineActivity : AppCompatActivity() {
     }//saveMedicine functions
     
     private fun find() : Int{
-        val medicineArrayList = patientObject.medicineArrayList!!
+        val medicineArrayList = patientObject.medicationArrayList!!
         medicineArrayList.forEachIndexed { index, it ->
             if(it.uid == medicineObject.uid){
                 return index

@@ -11,19 +11,19 @@ import com.google.firebase.database.FirebaseDatabase
 import com.origami.mdrecord.ChoosePatientActivity
 import com.origami.mdrecord.R
 import com.origami.mdrecord.objects.AssessmentObject
-import kotlinx.android.synthetic.main.activity_add_lab_assessment.*
+import kotlinx.android.synthetic.main.activity_add_lab_result.*
 import kotlinx.android.synthetic.main.confirm_assessment_alert_dialog.view.*
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 import java.util.ArrayList
 
-class AddLabAssessmentActivity : AppCompatActivity() {
+class AddLabResultActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_lab_assessment)
-        setTitle("Add Lab Assessment")
+        setContentView(R.layout.activity_add_lab_result)
+        setTitle("Add Lab Result")
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -33,7 +33,7 @@ class AddLabAssessmentActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
-            R.id.save_lab_assessment -> {
+            R.id.save_lab_result -> {
                 val assessment = assessment_input_lab.text.toString().trim()
                 if(assessment.isEmpty()){
                     Toast.makeText(this, "Please enter an assessment", Toast.LENGTH_SHORT).show()
@@ -50,7 +50,7 @@ class AddLabAssessmentActivity : AppCompatActivity() {
                     alertDialog.show()
 
                     dialogView.confirm_confirm_button_asessment_alert_dialog.setOnClickListener {
-                        saveLabAssessment()
+                        saveLabResult()
                         alertDialog.dismiss()
                     }
                 }
@@ -59,7 +59,7 @@ class AddLabAssessmentActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun saveLabAssessment(){
+    private fun saveLabResult(){
         val timeStamp = LocalDateTime.now()
         val timeFormatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM)
         val dateAndTime = timeStamp.format(timeFormatter)
@@ -77,5 +77,5 @@ class AddLabAssessmentActivity : AppCompatActivity() {
         ref.setValue(labHistoryArrayList)
 
         finish()
-    }//saveLabAssessment function
+    }//saveLabResult function
 }

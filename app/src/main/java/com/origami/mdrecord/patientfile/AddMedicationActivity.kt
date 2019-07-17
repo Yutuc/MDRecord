@@ -9,26 +9,26 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.origami.mdrecord.ChoosePatientActivity
 import com.origami.mdrecord.R
-import com.origami.mdrecord.objects.MedicineObject
-import kotlinx.android.synthetic.main.activity_add_medicine.*
+import com.origami.mdrecord.objects.MedicationObject
+import kotlinx.android.synthetic.main.activity_add_medication.*
 import java.util.ArrayList
 
-class AddMedicineActivity : AppCompatActivity() {
+class AddMedicationActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_medicine)
-        setTitle("Add Medicine")
+        setContentView(R.layout.activity_add_medication)
+        setTitle("Add Medication")
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.add_medicine_menu, menu)
+        menuInflater.inflate(R.menu.add_medication_menu, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
-            R.id.save_medicine -> {
+            R.id.save_medication -> {
                 val drugName = drug_name_input_medicine.text.toString().trim()
                 val dose = dose_input_medicine.text.toString().trim()
                 val frequency = frequency_input_medicine.text.toString().trim()
@@ -64,15 +64,15 @@ class AddMedicineActivity : AppCompatActivity() {
         val frequency = frequency_input_medicine.text.toString().trim()
         val instructions = instructions_input_medicine.text.toString().trim()
 
-        var medicineArrayList: ArrayList<MedicineObject>? = arrayListOf()
+        var medicationArrayList: ArrayList<MedicationObject>? = arrayListOf()
 
-        if(ChoosePatientActivity.patientClicked!!.patientObject.medicineArrayList != null) {
-            medicineArrayList = ChoosePatientActivity.patientClicked!!.patientObject.medicineArrayList!!
+        if(ChoosePatientActivity.patientClicked!!.patientObject.medicationArrayList != null) {
+            medicationArrayList = ChoosePatientActivity.patientClicked!!.patientObject.medicationArrayList!!
         }
 
-        val ref = FirebaseDatabase.getInstance().getReference("/patients/${FirebaseAuth.getInstance().uid}/${ChoosePatientActivity.patientClicked?.patientObject?.uid}").child("medicineArrayList")
-        medicineArrayList!!.add(MedicineObject(medicineArrayList.size.toString(), drugName, dose, frequency, instructions))
-        ref.setValue(medicineArrayList)
+        val ref = FirebaseDatabase.getInstance().getReference("/patients/${FirebaseAuth.getInstance().uid}/${ChoosePatientActivity.patientClicked?.patientObject?.uid}").child("medicationArrayList")
+        medicationArrayList!!.add(MedicationObject(medicationArrayList.size.toString(), drugName, dose, frequency, instructions))
+        ref.setValue(medicationArrayList)
             .addOnSuccessListener {
                 Toast.makeText(this, "Successfully added medicine", Toast.LENGTH_SHORT).show()
                 finish()

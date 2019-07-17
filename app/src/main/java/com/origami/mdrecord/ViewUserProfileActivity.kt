@@ -11,7 +11,6 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.origami.mdrecord.objects.UserObject
-import com.origami.mdrecord.patientfile.EditUserActivity
 import com.origami.mdrecord.patientfile.ViewPatientFileActivity
 import kotlinx.android.synthetic.main.activity_view_user_profile.*
 

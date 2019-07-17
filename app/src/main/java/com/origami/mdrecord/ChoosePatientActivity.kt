@@ -1,11 +1,13 @@
 package com.origami.mdrecord
 
+import android.app.AlertDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.google.firebase.auth.FirebaseAuth
@@ -20,6 +22,7 @@ import com.origami.mdrecord.registerlogin.LoginActivity
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_choose_patient.*
+import kotlinx.android.synthetic.main.confirm_patient_delete_alert_dialog.view.*
 
 class ChoosePatientActivity : AppCompatActivity() {
 
@@ -45,6 +48,25 @@ class ChoosePatientActivity : AppCompatActivity() {
             patientClicked = item as PatientRow
             val intent = Intent(this, ViewPatientFileActivity::class.java)
             startActivity(intent)
+        }
+
+        adapter.setOnItemLongClickListener { item, _ ->
+            patientClicked = item as PatientRow
+            val dialogBuilder = AlertDialog.Builder(this)
+            val dialogView = layoutInflater.inflate(R.layout.confirm_patient_delete_alert_dialog, null)
+            dialogBuilder.setView(dialogView)
+
+            val alertDialog = dialogBuilder.create()!!
+            alertDialog.setTitle("Confirm delete?")
+            alertDialog.show()
+
+            dialogView.confirm_delete_patient_button_confirm_delete_patient_alert_dialog.setOnClickListener {
+                val ref = FirebaseDatabase.getInstance().getReference("/patients/${FirebaseAuth.getInstance().uid}").child(patientClicked!!.patientObject.uid)
+                ref.removeValue()
+                Toast.makeText(this, "Successfully deleted patient", Toast.LENGTH_SHORT).show()
+                alertDialog.dismiss()
+            }
+            true
         }
 
         pullPatients()

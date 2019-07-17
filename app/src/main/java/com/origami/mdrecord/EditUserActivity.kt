@@ -1,4 +1,4 @@
-package com.origami.mdrecord.patientfile
+package com.origami.mdrecord
 
 import android.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -9,8 +9,8 @@ import android.widget.Toast
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
-import com.origami.mdrecord.R
 import com.origami.mdrecord.objects.UserObject
+import com.origami.mdrecord.patientfile.ViewPatientFileActivity
 import kotlinx.android.synthetic.main.activity_edit_user.*
 import kotlinx.android.synthetic.main.change_password_alert_dialog.view.*
 
