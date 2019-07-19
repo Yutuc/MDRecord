@@ -65,17 +65,14 @@ class AddNoteActivity : AppCompatActivity() {
         val dateAndTime = timeStamp.format(timeFormatter)
         val assessment = assessment_input_note.text.toString().trim()
 
-        var notesArrayList = ChoosePatientActivity.patientClicked!!.patientObject.notesArrayList
-
-        if(notesArrayList == null){
-            notesArrayList = ArrayList<AssessmentObject>()
-        }
-        ChoosePatientActivity.patientClicked!!.patientObject.notesArrayList = notesArrayList
-        notesArrayList.add(AssessmentObject(dateAndTime, assessment))
-
-        val ref = FirebaseDatabase.getInstance().getReference("/patients/${FirebaseAuth.getInstance().uid}/${ChoosePatientActivity.patientClicked?.patientObject?.uid}").child("notesArrayList")
-        ref.setValue(notesArrayList)
-
-        finish()
+        val ref = FirebaseDatabase.getInstance().getReference("/patients/${FirebaseAuth.getInstance().uid}/${ChoosePatientActivity.patientClicked?.patientObject?.uid}/notes").push()
+        ref.setValue(AssessmentObject(dateAndTime, assessment))
+            .addOnSuccessListener {
+                Toast.makeText(this, "Successfully added note", Toast.LENGTH_SHORT).show()
+                finish()
+            }
+            .addOnFailureListener {
+                Toast.makeText(this, "${it.message}", Toast.LENGTH_SHORT).show()
+            }
     }//saveNote function
 }

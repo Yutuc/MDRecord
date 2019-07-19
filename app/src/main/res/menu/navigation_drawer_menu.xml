@@ -7,9 +7,9 @@
 
         <menu>
             <group android:checkableBehavior="single">
-                <item android:id="@+id/create_medical_certificate"
-                      android:icon="@drawable/ic_notes_white"
-                      android:title="Create Medical Certificate"/>
+                <item android:id="@+id/medical_certificate_history"
+                      android:icon="@drawable/ic_medical_form_white"
+                      android:title="Medical Certificate History"/>
 
                 <item android:id="@+id/create_medical_abstract_form"
                       android:icon="@drawable/ic_notes_white"

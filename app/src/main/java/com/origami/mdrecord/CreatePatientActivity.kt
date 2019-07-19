@@ -194,11 +194,7 @@ class CreatePatientActivity : AppCompatActivity() {
                 address,
                 email,
                 contactNumber,
-                diagnoses,
-                null,
-                null,
-                null,
-                null
+                diagnoses
             )
         )
             .addOnSuccessListener {

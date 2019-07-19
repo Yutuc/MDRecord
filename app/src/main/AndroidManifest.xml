@@ -9,8 +9,24 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".SplashScreenActivity"
-                  android:theme="@style/SplashTheme">
+        <activity android:name=".patientfile.ExpandedMedicalCertificateActivity">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".patientfile.MedicalCertificateHistoryActivity"/>
+        </activity>
+        <activity android:name=".patientfile.CreateMedicalCertificateActivity">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".patientfile.MedicalCertificateHistoryActivity"/>
+        </activity>
+        <activity android:name=".patientfile.MedicalCertificateHistoryActivity">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".patientfile.ViewPatientFileActivity"/>
+        </activity>
+        <activity
+                android:name=".SplashScreenActivity"
+                android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -27,12 +43,12 @@
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value=".ViewUserProfileActivity"/>
         </activity>
-        <activity android:name=".patientfile.EditMedicationActivity">
+        <activity android:name=".patientfile.EditPatientMedicationActivity">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value=".patientfile.ViewPatientFileActivity"/>
         </activity>
-        <activity android:name=".patientfile.AddMedicationActivity">
+        <activity android:name=".patientfile.AddPatientMedicationActivity">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value=".patientfile.ViewPatientFileActivity"/>

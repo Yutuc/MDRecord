@@ -29,7 +29,7 @@ class ViewPatientFileActivity : AppCompatActivity() {
 
     val tabIconsArrayList = arrayOf(
         R.drawable.ic_medical_history_white,
-        R.drawable.ic_medicine_white,
+        R.drawable.ic_pharmacy_white,
         R.drawable.ic_labs_white,
         R.drawable.ic_notes_white
     )
@@ -40,7 +40,7 @@ class ViewPatientFileActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar!!.setHomeButtonEnabled(true)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        setTitle("")
+        supportActionBar!!.setTitle("Medical History")
 
         val toggle = ActionBarDrawerToggle(this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer_layout.addDrawerListener(toggle)
@@ -48,13 +48,14 @@ class ViewPatientFileActivity : AppCompatActivity() {
 
         navigation_drawer_view.setNavigationItemSelectedListener {
             when(it.itemId){
-                R.id.create_medical_certificate ->{
+                R.id.medical_certificate_history -> {
+                    val intent = Intent(this, MedicalCertificateHistoryActivity::class.java)
+                    startActivity(intent)
+                }
+                R.id.create_medical_abstract_form -> {
 
                 }
-                R.id.create_medical_abstract_form ->{
-
-                }
-                R.id.schedule_appointment ->{
+                R.id.schedule_appointment -> {
                     val intent = Intent(Intent.ACTION_INSERT, CalendarContract.Events.CONTENT_URI)
                     startActivity(intent)
                 }
@@ -82,9 +83,22 @@ class ViewPatientFileActivity : AppCompatActivity() {
             }
 
             override fun onPageSelected(position: Int) {
+                when(position){
+                    0 ->{
+                        supportActionBar!!.setTitle("Medical History")
+                    }
+                    1 ->{
+                        supportActionBar!!.setTitle("Patient's Medication")
+                    }
+                    2 -> {
+                        supportActionBar!!.setTitle("Lab History")
+                    }
+                    else -> {
+                        supportActionBar!!.setTitle("Notes")
+                    }
+                }
                 currentTab = position
             }
-
         })
 
         val tab = tab_layout_patient_file.getTabAt(currentTab)
@@ -105,8 +119,8 @@ class ViewPatientFileActivity : AppCompatActivity() {
                 val intent = Intent(this, AddMedicalAssessmentActivity::class.java)
                 startActivity(intent)
             }
-            R.id.add_medication -> {
-                val intent = Intent(this, AddMedicationActivity::class.java)
+            R.id.add_patient_medication -> {
+                val intent = Intent(this, AddPatientMedicationActivity::class.java)
                 startActivity(intent)
             }
             R.id.add_lab_result -> {
@@ -193,7 +207,7 @@ class ViewPatientFileActivity : AppCompatActivity() {
             drawer_layout.closeDrawer(GravityCompat.START)
         }
         else{
-            finish()
+            super.onBackPressed()
             //NavUtils.navigateUpFromSameTask(this) //makes back pressed go to parent activity
         }
     }

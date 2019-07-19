@@ -39,23 +39,18 @@ class EditUserActivity : AppCompatActivity() {
 
                 if(oldPassword.isEmpty()){
                     Toast.makeText(this, "Please enter your old password", Toast.LENGTH_SHORT).show()
-                    true
                 }
                 else if(newPassword.isEmpty()){
                     Toast.makeText(this, "Please enter your new password", Toast.LENGTH_SHORT).show()
-                    true
                 }
                 else if(newPasswordConfirm.isEmpty()){
                     Toast.makeText(this, "Please confirm your new password", Toast.LENGTH_SHORT).show()
-                    true
                 }
                 else if(currentUser.password != oldPassword){
                     Toast.makeText(this, "Incorrect old password", Toast.LENGTH_SHORT).show()
-                    true
                 }
                 else if(newPassword != newPasswordConfirm){
                     Toast.makeText(this, "New password and confirmation password don't match", Toast.LENGTH_SHORT).show()
-                    true
                 }
                 else{
                     val user = FirebaseAuth.getInstance().currentUser

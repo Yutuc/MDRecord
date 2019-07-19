@@ -65,17 +65,14 @@ class AddMedicalAssessmentActivity : AppCompatActivity() {
         val dateAndTime = timeStamp.format(timeFormatter)
         val assessment = assessment_input_medical_history.text.toString().trim()
 
-        var medicalHistoryArrayList = ChoosePatientActivity.patientClicked!!.patientObject.medicalHistoryArrayList
-
-        if(medicalHistoryArrayList == null){
-            medicalHistoryArrayList = ArrayList<AssessmentObject>()
-        }
-        ChoosePatientActivity.patientClicked!!.patientObject.medicalHistoryArrayList = medicalHistoryArrayList
-        medicalHistoryArrayList.add(AssessmentObject(dateAndTime, assessment))
-
-        val ref = FirebaseDatabase.getInstance().getReference("/patients/${FirebaseAuth.getInstance().uid}/${ChoosePatientActivity.patientClicked?.patientObject?.uid}").child("medicalHistoryArrayList")
-        ref.setValue(medicalHistoryArrayList)
-
-        finish()
+        val ref = FirebaseDatabase.getInstance().getReference("/patients/${FirebaseAuth.getInstance().uid}/${ChoosePatientActivity.patientClicked?.patientObject?.uid}/medical-history").push()
+        ref.setValue(AssessmentObject(dateAndTime, assessment))
+            .addOnSuccessListener {
+                Toast.makeText(this, "Successfully added medical assessment", Toast.LENGTH_SHORT).show()
+                finish()
+            }
+            .addOnFailureListener {
+                Toast.makeText(this, "${it.message}", Toast.LENGTH_SHORT).show()
+            }
     }//saveMedicalAssessment function
 }

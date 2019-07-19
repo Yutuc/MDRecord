@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/save_edit_medication"
+    <item android:id="@+id/save_edit_patient_medication"
           android:title="Save Edit"
           android:icon="@drawable/ic_save_white"
           app:showAsAction="ifRoom" />

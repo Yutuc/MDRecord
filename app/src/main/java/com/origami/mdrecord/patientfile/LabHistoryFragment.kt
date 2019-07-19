@@ -40,7 +40,7 @@ class LabHistoryFragment : Fragment() {
     }
 
     private fun pullLabHistory(){
-        val ref = FirebaseDatabase.getInstance().getReference("/patients/${FirebaseAuth.getInstance().uid}/${ChoosePatientActivity.patientClicked?.patientObject?.uid}/labHistoryArrayList")
+        val ref = FirebaseDatabase.getInstance().getReference("/patients/${FirebaseAuth.getInstance().uid}/${ChoosePatientActivity.patientClicked?.patientObject?.uid}/lab-history")
         ref.addChildEventListener(object: ChildEventListener {
             override fun onCancelled(p0: DatabaseError) {
 

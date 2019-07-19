@@ -12,7 +12,7 @@ class ViewPagerAdapter (fm: FragmentManager?) : FragmentPagerAdapter(fm) {
                 MedicalHistoryFragment()
             }
             1 -> {
-                MedicationFragment()
+                PatientMedicationFragment()
             }
             2 -> {
                 LabHistoryFragment()

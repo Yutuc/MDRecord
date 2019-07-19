@@ -289,11 +289,7 @@ class EditPatientActivity : AppCompatActivity() {
             address,
             email,
             contactNumber,
-            diagnoses,
-            patientObject.medicalHistoryArrayList,
-            patientObject.medicationArrayList,
-            patientObject.labHistoryArrayList,
-            patientObject.notesArrayList
+            diagnoses
         )
 
         ref.setValue(editedPatient)

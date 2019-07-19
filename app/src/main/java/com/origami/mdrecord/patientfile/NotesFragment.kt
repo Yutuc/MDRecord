@@ -40,7 +40,7 @@ class NotesFragment : Fragment() {
     }
 
     private fun pullNotes(){
-        val ref = FirebaseDatabase.getInstance().getReference("/patients/${FirebaseAuth.getInstance().uid}/${ChoosePatientActivity.patientClicked?.patientObject?.uid}/notesArrayList")
+        val ref = FirebaseDatabase.getInstance().getReference("/patients/${FirebaseAuth.getInstance().uid}/${ChoosePatientActivity.patientClicked?.patientObject?.uid}/notes")
         ref.addChildEventListener(object: ChildEventListener {
             override fun onCancelled(p0: DatabaseError) {
 

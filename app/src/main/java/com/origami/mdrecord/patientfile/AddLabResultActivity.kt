@@ -65,17 +65,14 @@ class AddLabResultActivity : AppCompatActivity() {
         val dateAndTime = timeStamp.format(timeFormatter)
         val assessment = assessment_input_lab.text.toString().trim()
 
-        var labHistoryArrayList = ChoosePatientActivity.patientClicked!!.patientObject.labHistoryArrayList
-
-        if(labHistoryArrayList == null){
-            labHistoryArrayList = ArrayList<AssessmentObject>()
-        }
-        ChoosePatientActivity.patientClicked!!.patientObject.labHistoryArrayList = labHistoryArrayList
-        labHistoryArrayList.add(AssessmentObject(dateAndTime, assessment))
-
-        val ref = FirebaseDatabase.getInstance().getReference("/patients/${FirebaseAuth.getInstance().uid}/${ChoosePatientActivity.patientClicked?.patientObject?.uid}").child("labHistoryArrayList")
-        ref.setValue(labHistoryArrayList)
-
-        finish()
+        val ref = FirebaseDatabase.getInstance().getReference("/patients/${FirebaseAuth.getInstance().uid}/${ChoosePatientActivity.patientClicked?.patientObject?.uid}/lab-history").push()
+        ref.setValue(AssessmentObject(dateAndTime, assessment))
+            .addOnSuccessListener {
+                Toast.makeText(this, "Successfully added lab result", Toast.LENGTH_SHORT).show()
+                finish()
+            }
+            .addOnFailureListener {
+                Toast.makeText(this, "${it.message}", Toast.LENGTH_SHORT).show()
+            }
     }//saveLabResult function
 }
