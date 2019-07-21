@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.origami.mdrecord">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
     <application
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
@@ -9,6 +12,16 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity android:name=".patientfile.ViewMedicalAbstractFormPDFActivity">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".patientfile.CreateMedicalAbstractFormActivity"/>
+        </activity>
+        <activity android:name=".patientfile.CreateMedicalAbstractFormActivity">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".patientfile.ViewPatientFileActivity"/>
+        </activity>
         <activity android:name=".patientfile.ExpandedMedicalCertificateActivity">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"

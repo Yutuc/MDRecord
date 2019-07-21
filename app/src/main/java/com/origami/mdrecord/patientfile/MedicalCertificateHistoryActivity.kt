@@ -91,5 +91,6 @@ class MedicalCertificateHistoryActivity : AppCompatActivity() {
         medicalCertificateHistoryArrayList.forEach {
             adapter.add(MedicalCertificateRow(it))
         }
+        recyclerview_medical_certificate_history.layoutManager!!.scrollToPosition(adapter.itemCount-1)
     }//refreshRecyclerView function
 }

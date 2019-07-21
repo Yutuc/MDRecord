@@ -53,7 +53,8 @@ class ViewPatientFileActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
                 R.id.create_medical_abstract_form -> {
-
+                    val intent = Intent(this, CreateMedicalAbstractFormActivity::class.java)
+                    startActivity(intent)
                 }
                 R.id.schedule_appointment -> {
                     val intent = Intent(Intent.ACTION_INSERT, CalendarContract.Events.CONTENT_URI)

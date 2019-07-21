@@ -72,5 +72,6 @@ class NotesFragment : Fragment() {
         notesArrayList.forEach {
             adapter.add(AssessmentRow(it))
         }
+        view?.recyclerview_notes!!.layoutManager!!.scrollToPosition(adapter.itemCount-1)
     }//refreshRecyclerView function
 }
