@@ -10,24 +10,24 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import com.origami.mdrecord.R
-import kotlinx.android.synthetic.main.activity_view_medical_abstract_form_pdf.*
+import kotlinx.android.synthetic.main.activity_expanded_medical_abstract_form.*
 import java.io.File
 import java.io.FileOutputStream
 import java.lang.Exception
 
-class ViewMedicalAbstractFormPDFActivity : AppCompatActivity() {
+class ExpandedMedicalAbstractFormActivity : AppCompatActivity() {
 
-    val medicalAbstractFormCreated = CreateMedicalAbstractFormActivity.medicalAbstractFormCreated!!
+    val medicalAbstractFormClicked = MedicalAbstractFormHistoryActivity.medicalAbstractFormClicked!!.medicalAbstractFormObject
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_view_medical_abstract_form_pdf)
+        setContentView(R.layout.activity_expanded_medical_abstract_form)
         setTitle("View Medical Abstract Form")
         displayInfo()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.view_medical_abstract_form_pdf_menu, menu)
+        menuInflater.inflate(R.menu.expanded_medical_abstract_form_menu, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -41,16 +41,16 @@ class ViewMedicalAbstractFormPDFActivity : AppCompatActivity() {
     }
 
     private fun displayInfo(){
-        patient_name_textview_view_medical_abstract_form_pdf.text = medicalAbstractFormCreated.patientName
-        patient_age_textview_view_medical_abstract_form_pdf.text = medicalAbstractFormCreated.patientAge
-        patient_gender_textview_view_medical_abstract_form_pdf.text = medicalAbstractFormCreated.patientGender
-        patient_address_textview_view_medical_abstract_form_pdf.text = medicalAbstractFormCreated.patientAddress
-        medical_history_textview_view_medical_abstract_form_pdf.text = medicalAbstractFormCreated.medicalHistory
-        physical_examination_textview_view_medical_abstract_form_pdf.text = medicalAbstractFormCreated.phyisicalExamination
-        diagnoses_textview_view_medical_abstract_form_pdf.text = medicalAbstractFormCreated.diagnoses
-        plans_textview_view_medical_abstract_form_pdf.text = medicalAbstractFormCreated.plans
-        name_of_doctor_textview_view_medical_abstract_form_pdf.text = medicalAbstractFormCreated.doctorName
-        license_number_textview_view_medical_abstract_form_pdf.text = medicalAbstractFormCreated.licenseNumber
+        patient_name_textview_view_medical_abstract_form_pdf.text = medicalAbstractFormClicked.patientName
+        patient_age_textview_view_medical_abstract_form_pdf.text = medicalAbstractFormClicked.patientAge
+        patient_gender_textview_view_medical_abstract_form_pdf.text = medicalAbstractFormClicked.patientGender
+        patient_address_textview_view_medical_abstract_form_pdf.text = medicalAbstractFormClicked.patientAddress
+        medical_history_textview_view_medical_abstract_form_pdf.text = medicalAbstractFormClicked.medicalHistory
+        physical_examination_textview_view_medical_abstract_form_pdf.text = medicalAbstractFormClicked.phyisicalExamination
+        diagnoses_textview_view_medical_abstract_form_pdf.text = medicalAbstractFormClicked.diagnoses
+        plans_textview_view_medical_abstract_form_pdf.text = medicalAbstractFormClicked.plans
+        name_of_doctor_textview_view_medical_abstract_form_pdf.text = medicalAbstractFormClicked.doctorName
+        license_number_textview_view_medical_abstract_form_pdf.text = medicalAbstractFormClicked.licenseNumber
     }//displayInfo function
 
     private fun createPDF(){

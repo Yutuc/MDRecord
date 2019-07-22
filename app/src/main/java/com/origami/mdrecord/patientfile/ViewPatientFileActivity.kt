@@ -52,8 +52,8 @@ class ViewPatientFileActivity : AppCompatActivity() {
                     val intent = Intent(this, MedicalCertificateHistoryActivity::class.java)
                     startActivity(intent)
                 }
-                R.id.create_medical_abstract_form -> {
-                    val intent = Intent(this, CreateMedicalAbstractFormActivity::class.java)
+                R.id.medical_abstract_form_history -> {
+                    val intent = Intent(this, MedicalAbstractFormHistoryActivity::class.java)
                     startActivity(intent)
                 }
                 R.id.schedule_appointment -> {

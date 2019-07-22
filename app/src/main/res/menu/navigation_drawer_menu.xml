@@ -11,9 +11,9 @@
                       android:icon="@drawable/ic_medical_form_white"
                       android:title="Medical Certificate History"/>
 
-                <item android:id="@+id/create_medical_abstract_form"
-                      android:icon="@drawable/ic_notes_white"
-                      android:title="Create Medical Abstract Form"/>
+                <item android:id="@+id/medical_abstract_form_history"
+                      android:icon="@drawable/ic_medical_form_white"
+                      android:title="Medical Abstract Form History"/>
             </group>
         </menu>
 

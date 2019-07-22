@@ -6,17 +6,15 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import com.google.firebase.database.FirebaseDatabase
 import com.origami.mdrecord.ChoosePatientActivity
 import com.origami.mdrecord.R
 import com.origami.mdrecord.objects.MedicalAbstractFormObject
 import kotlinx.android.synthetic.main.activity_create_medical_abstract_form.*
+import java.text.DateFormat
 import java.util.*
 
 class CreateMedicalAbstractFormActivity : AppCompatActivity() {
-
-    companion object{
-        var medicalAbstractFormCreated: MedicalAbstractFormObject? = null
-    }
 
     val patientObject = ChoosePatientActivity.patientClicked!!.patientObject
 
@@ -64,6 +62,10 @@ class CreateMedicalAbstractFormActivity : AppCompatActivity() {
     }
 
     private fun viewPDF(){
+
+        val calendar = Calendar.getInstance()
+        val date = DateFormat.getDateInstance(DateFormat.MEDIUM).format(calendar.time)
+
         val patientName = "${patientObject.firstName} ${patientObject.middleName} ${patientObject.lastName}"
         val patientAge = getAge()
         val patientGender = getGender()
@@ -78,9 +80,16 @@ class CreateMedicalAbstractFormActivity : AppCompatActivity() {
         val doctorName = "${currentUser.firstName} ${currentUser.middleName.get(0)}. ${currentUser.lastName}"
         val licenseNumber = currentUser.licenseNumber
 
-        medicalAbstractFormCreated = MedicalAbstractFormObject(patientName, patientAge, patientGender, patientAddress, medicalHistory, physicalExamination, diagnoses, plans, doctorName, licenseNumber)
-        val intent = Intent(this, ViewMedicalAbstractFormPDFActivity::class.java)
-        startActivity(intent)
+        val medicalAbstractFormObject= MedicalAbstractFormObject(date, patientName, patientAge, patientGender, patientAddress, medicalHistory, physicalExamination, diagnoses, plans, doctorName, licenseNumber)
+        val ref = FirebaseDatabase.getInstance().getReference("/patients/${currentUser.uid}/${patientObject.uid}").child("medical-abstract-form-history").push()
+        ref.setValue(medicalAbstractFormObject)
+            .addOnSuccessListener {
+                Toast.makeText(this, "Successfully saved a medical abstract form", Toast.LENGTH_SHORT).show()
+                finish()
+            }
+            .addOnFailureListener {
+                Toast.makeText(this, it.message, Toast.LENGTH_SHORT).show()
+            }
     }//viewPDF function
 
     private fun getAge() : String{
