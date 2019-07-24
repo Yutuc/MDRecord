@@ -23,9 +23,6 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         already_have_an_account_textview.setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK) //clears the stack of activities
-            startActivity(intent)
             finish()
         }
     }
@@ -122,9 +119,7 @@ class RegisterActivity : AppCompatActivity() {
 
         ref.setValue(user)
             .addOnSuccessListener {
-                Toast.makeText(this, "Successful registration\nPlease verify your email address before logging in", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this, LoginActivity::class.java)
-                startActivity(intent)
+                Toast.makeText(this, "Please verify email before logging in", Toast.LENGTH_SHORT).show()
                 finish()
             }
             .addOnFailureListener {

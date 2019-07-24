@@ -115,6 +115,9 @@
         <activity
                 android:name=".registerlogin.RegisterActivity"
                 android:windowSoftInputMode="adjustPan">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".registerlogin.LoginActivity"/>
         </activity>
         <activity
                 android:name=".registerlogin.LoginActivity"

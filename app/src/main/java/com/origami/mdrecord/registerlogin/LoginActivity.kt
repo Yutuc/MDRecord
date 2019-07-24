@@ -21,9 +21,7 @@ class LoginActivity : AppCompatActivity() {
 
         create_an_account_textview_login.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK) //clears the stack of activities
             startActivity(intent)
-            finish()
         }
     }
 
