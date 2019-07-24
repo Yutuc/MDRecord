@@ -284,7 +284,7 @@ class EditPatientActivity : AppCompatActivity() {
                     Toast.makeText(this, "${it.message}", Toast.LENGTH_SHORT).show()
                 }
         }
-        else if(middleName != patientObject.middleName){
+        if(middleName != patientObject.middleName){
             ref.child("middleName").setValue(middleName)
                 .addOnSuccessListener {
                     Toast.makeText(this, "Successfully edited patient", Toast.LENGTH_SHORT).show()
@@ -294,7 +294,7 @@ class EditPatientActivity : AppCompatActivity() {
                     Toast.makeText(this, "${it.message}", Toast.LENGTH_SHORT).show()
                 }
         }
-        else if(lastName != patientObject.lastName){
+        if(lastName != patientObject.lastName){
             ref.child("lastName").setValue(lastName)
                 .addOnSuccessListener {
                     Toast.makeText(this, "Successfully edited patient", Toast.LENGTH_SHORT).show()
@@ -304,7 +304,7 @@ class EditPatientActivity : AppCompatActivity() {
                     Toast.makeText(this, "${it.message}", Toast.LENGTH_SHORT).show()
                 }
         }
-        else if(dateOfBirth != patientObject.dateOfBirth){
+        if(dateOfBirth != patientObject.dateOfBirth){
             ref.child("dateOfBirth").setValue(dateOfBirth)
                 .addOnSuccessListener {
                     Toast.makeText(this, "Successfully edited patient", Toast.LENGTH_SHORT).show()
@@ -314,7 +314,7 @@ class EditPatientActivity : AppCompatActivity() {
                     Toast.makeText(this, "${it.message}", Toast.LENGTH_SHORT).show()
                 }
         }
-        else if(gender != patientObject.gender){
+        if(gender != patientObject.gender){
             ref.child("gender").setValue(gender)
                 .addOnSuccessListener {
                     Toast.makeText(this, "Successfully edited patient", Toast.LENGTH_SHORT).show()
@@ -324,7 +324,7 @@ class EditPatientActivity : AppCompatActivity() {
                     Toast.makeText(this, "${it.message}", Toast.LENGTH_SHORT).show()
                 }
         }
-        else if(bloodType != patientObject.bloodType){
+        if(bloodType != patientObject.bloodType){
             ref.child("bloodType").setValue(bloodType)
                 .addOnSuccessListener {
                     Toast.makeText(this, "Successfully edited patient", Toast.LENGTH_SHORT).show()
@@ -334,7 +334,7 @@ class EditPatientActivity : AppCompatActivity() {
                     Toast.makeText(this, "${it.message}", Toast.LENGTH_SHORT).show()
                 }
         }
-        else if(civilStatus != patientObject.civilStatus){
+        if(civilStatus != patientObject.civilStatus){
             ref.child("civilStatus").setValue(civilStatus)
                 .addOnSuccessListener {
                     Toast.makeText(this, "Successfully edited patient", Toast.LENGTH_SHORT).show()
@@ -354,7 +354,7 @@ class EditPatientActivity : AppCompatActivity() {
                     Toast.makeText(this, "${it.message}", Toast.LENGTH_SHORT).show()
                 }
         }
-        else if(weight != patientObject.weight){
+        if(weight != patientObject.weight){
             ref.child("weight").setValue(weight)
                 .addOnSuccessListener {
                     Toast.makeText(this, "Successfully edited patient", Toast.LENGTH_SHORT).show()
@@ -364,7 +364,7 @@ class EditPatientActivity : AppCompatActivity() {
                     Toast.makeText(this, "${it.message}", Toast.LENGTH_SHORT).show()
                 }
         }
-        else if(nationality != patientObject.nationality){
+        if(nationality != patientObject.nationality){
             ref.child("nationality").setValue(nationality)
                 .addOnSuccessListener {
                     Toast.makeText(this, "Successfully edited patient", Toast.LENGTH_SHORT).show()
@@ -374,7 +374,7 @@ class EditPatientActivity : AppCompatActivity() {
                     Toast.makeText(this, "${it.message}", Toast.LENGTH_SHORT).show()
                 }
         }
-        else if(religion != patientObject.religion){
+        if(religion != patientObject.religion){
             ref.child("religion").setValue(religion)
                 .addOnSuccessListener {
                     Toast.makeText(this, "Successfully edited patient", Toast.LENGTH_SHORT).show()
@@ -384,7 +384,7 @@ class EditPatientActivity : AppCompatActivity() {
                     Toast.makeText(this, "${it.message}", Toast.LENGTH_SHORT).show()
                 }
         }
-        else if(address != patientObject.address){
+        if(address != patientObject.address){
             ref.child("address").setValue(address)
                 .addOnSuccessListener {
                     Toast.makeText(this, "Successfully edited patient", Toast.LENGTH_SHORT).show()
@@ -394,7 +394,7 @@ class EditPatientActivity : AppCompatActivity() {
                     Toast.makeText(this, "${it.message}", Toast.LENGTH_SHORT).show()
                 }
         }
-        else if(email != patientObject.email){
+        if(email != patientObject.email){
             ref.child("email").setValue(email)
                 .addOnSuccessListener {
                     Toast.makeText(this, "Successfully edited patient", Toast.LENGTH_SHORT).show()
@@ -404,7 +404,7 @@ class EditPatientActivity : AppCompatActivity() {
                     Toast.makeText(this, "${it.message}", Toast.LENGTH_SHORT).show()
                 }
         }
-        else if(contactNumber != patientObject.contactNumber){
+        if(contactNumber != patientObject.contactNumber){
             ref.child("contactNumber").setValue(contactNumber)
                 .addOnSuccessListener {
                     Toast.makeText(this, "Successfully edited patient", Toast.LENGTH_SHORT).show()
@@ -414,7 +414,7 @@ class EditPatientActivity : AppCompatActivity() {
                     Toast.makeText(this, "${it.message}", Toast.LENGTH_SHORT).show()
                 }
         }
-        else if(diagnoses != patientObject.diagnoses){
+        if(diagnoses != patientObject.diagnoses){
             ref.child("diagnoses").setValue(diagnoses)
                 .addOnSuccessListener {
                     Toast.makeText(this, "Successfully edited patient", Toast.LENGTH_SHORT).show()
