@@ -344,7 +344,7 @@ class EditPatientActivity : AppCompatActivity() {
                     Toast.makeText(this, "${it.message}", Toast.LENGTH_SHORT).show()
                 }
         }
-        else if(height != patientObject.height){
+        if(height != patientObject.height){
             ref.child("height").setValue(height)
                 .addOnSuccessListener {
                     Toast.makeText(this, "Successfully edited patient", Toast.LENGTH_SHORT).show()

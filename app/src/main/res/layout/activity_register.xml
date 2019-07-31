@@ -20,7 +20,7 @@
                 <EditText
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:inputType="textEmailAddress"
+                        android:inputType="text"
                         android:ems="10"
                         android:id="@+id/email_input_register"
                         app:layout_constraintStart_toStartOf="@+id/contact_number_input_register"
